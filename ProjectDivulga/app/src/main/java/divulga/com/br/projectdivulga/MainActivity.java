@@ -3,6 +3,7 @@ package divulga.com.br.projectdivulga;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 
 import divulga.com.br.projectdivulga.fragments.Anuncie;
 import divulga.com.br.projectdivulga.fragments.Cidades;
+import divulga.com.br.projectdivulga.fragments.Estabelecimentos;
 import divulga.com.br.projectdivulga.fragments.Sobre;
 import divulga.com.br.projectdivulga.fragments.TelefonesUteis;
 
@@ -20,6 +22,7 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
+    public static MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +47,17 @@ public class MainActivity extends BaseActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        commitFragment(Cidades.class);
+        addFragment(Anuncie.class, "ANUNCIE");
+        addFragment(Cidades.class, "CIDADES");
+        addFragment(Estabelecimentos.class, "ESTABELECIMENTOS");
+        addFragment(Sobre.class, "SOBRE");
+        addFragment(TelefonesUteis.class, "TELEFONES");
+        commitFragment("CIDADES", null);
         navigationView.setCheckedItem(R.id.nav_camera);
+        mainActivity = MainActivity.this;
     }
+
+    private String lastUsed = null;
 
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -56,13 +67,13 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            commitFragment(Cidades.class);
+            lastUsed = commitFragment("CIDADES", lastUsed);
         } else if (id == R.id.nav_gallery) {
-            commitFragment(Sobre.class);
+            lastUsed = commitFragment("SOBRE", lastUsed);
         } else if (id == R.id.nav_slideshow) {
-            commitFragment(Anuncie.class);
+            lastUsed = commitFragment("ANUNCIE", lastUsed);
         } else if (id == R.id.nav_manage) {
-            commitFragment(TelefonesUteis.class);
+            lastUsed = commitFragment("TELEFONES", lastUsed);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

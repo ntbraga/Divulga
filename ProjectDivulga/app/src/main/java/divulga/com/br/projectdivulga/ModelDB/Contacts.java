@@ -1,16 +1,25 @@
 package divulga.com.br.projectdivulga.ModelDB;
 
 
+import io.realm.RealmObject;
+
 /**
  *
  * @author PedroNeto
  */
-public class Contacts{
+public class Contacts extends RealmObject{
 	private int id;
 	private String contact_phone;
 	private int id_estab;
 	private String contact_email;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getContact_phone(){
        return this.contact_phone;
@@ -41,12 +50,4 @@ public class Contacts{
         this.contact_email = contact_email;
     }
 
-
-    public String getPk() {
-        return "id";
-    }
-
-    public String getTable() {
-        return "contacts";
-    }
 }

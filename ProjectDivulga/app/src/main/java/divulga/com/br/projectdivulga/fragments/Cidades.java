@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import divulga.com.br.projectdivulga.MainActivity;
 import divulga.com.br.projectdivulga.ModelDB.Cities;
 import divulga.com.br.projectdivulga.R;
 import divulga.com.br.projectdivulga.Utils.CityAdapter;
+import divulga.com.br.projectdivulga.Utils.ClickHelper;
 import divulga.com.br.projectdivulga.Utils.DividerItemDecoration;
 
 public class Cidades extends Fragment {
@@ -43,10 +45,24 @@ public class Cidades extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(cityAdapter);
+
+        recyclerView.addOnItemTouchListener(new ClickHelper.RecyclerTouchListener(view.getContext(), recyclerView, new ClickHelper.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                MainActivity.mainActivity.commitFragment("ESTABELECIMENTOS", "CIDADES");
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
         prepareMovieData();
 
         return view;
     }
+
 
 
     private void prepareMovieData() {

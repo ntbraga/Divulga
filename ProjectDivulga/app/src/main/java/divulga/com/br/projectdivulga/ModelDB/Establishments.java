@@ -1,11 +1,13 @@
 package divulga.com.br.projectdivulga.ModelDB;
 
 
+import io.realm.RealmObject;
+
 /**
  *
  * @author PedroNeto
  */
-public class Establishments{
+public class Establishments extends RealmObject{
 	private int id_city;
 	private String address_complement;
 	private String estab_name;
@@ -17,6 +19,20 @@ public class Establishments{
 	private String estab_description;
 	private String address_number;
 
+    public Establishments(){}
+
+    public Establishments(int id_city, String estab_name){
+        this.id_city = id_city;
+        this.estab_name = estab_name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getId_city(){
        return this.id_city;
@@ -107,12 +123,4 @@ public class Establishments{
         this.address_number = address_number;
     }
 
-
-    public String getPk() {
-        return "id";
-    }
-
-    public String getTable() {
-        return "establishments";
-    }
 }
