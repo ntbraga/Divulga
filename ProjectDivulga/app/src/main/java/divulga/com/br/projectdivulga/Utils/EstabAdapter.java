@@ -24,12 +24,11 @@ public class EstabAdapter extends RecyclerView.Adapter<EstabAdapter.EstabViewHol
 
     public class EstabViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
-        public ImageView border, image;
+        public ImageView image;
 
         public EstabViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.estab_name);
-            border = (ImageView) view.findViewById(R.id.estab_border);
             image = (ImageView) view.findViewById(R.id.estab_img);
         }
     }
@@ -47,27 +46,22 @@ public class EstabAdapter extends RecyclerView.Adapter<EstabAdapter.EstabViewHol
         return new EstabViewHolder(itemView);
     }
 
-    private int borders[] = new int[]{R.drawable.linear_border, R.drawable.linear_border2, R.drawable.linear_border3};
-    private static int border = 0;
+    private int[] colors = new int[]{R.color.colorBorder0, R.color.colorBorder1, R.color.colorBorder2};
+    private static int color = 0;
+
     @Override
     public void onBindViewHolder(EstabViewHolder holder, int position) {
         Establishments estab = estabs.get(position);
         holder.name.setText(estab.getEstab_name());
-        Drawable d = context.getDrawable(borders[border]);
-        holder.border.setImageDrawable(d);
-        switch(border){
-            case 0:{
-            }
+        holder.image.setImageDrawable(context.getDrawable(colors[color]));
+        switch(color){
+            case 0:
             case 1:{
-                border++;
+                color++;
                 break;
             }
-            case 2:{
-                border = 0;
-                break;
-            }
+            case 2: color = 0;
         }
-
     }
 
     @Override

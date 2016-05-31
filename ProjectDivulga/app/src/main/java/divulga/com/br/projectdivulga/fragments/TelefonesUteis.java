@@ -14,6 +14,8 @@ import divulga.com.br.projectdivulga.R;
 
 public class TelefonesUteis extends Fragment {
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -51,14 +51,6 @@ public class BaseActivity extends AppCompatActivity{
         }
     }
 
-    public void commitFragments(){
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        for(Map.Entry<String, Fragment> e: getFrags().entrySet()){
-            transaction.add(e.getValue(), e.getKey());
-        }
-        transaction.commit();
-    }
-
     public String commitFragment(final String frag, final String onBack){
         Handler handlerTimer = new Handler();
         final Fragment fragment = getFrags().get(frag);

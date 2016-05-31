@@ -49,6 +49,7 @@ public class Cidades extends Fragment {
         recyclerView.addOnItemTouchListener(new ClickHelper.RecyclerTouchListener(view.getContext(), recyclerView, new ClickHelper.ClickListener() {
             @Override
             public void onClick(View view, int position) {
+                MainActivity.mainActivity.selectedCity = cityList.get(position);
                 MainActivity.mainActivity.commitFragment("ESTABELECIMENTOS", "CIDADES");
             }
 

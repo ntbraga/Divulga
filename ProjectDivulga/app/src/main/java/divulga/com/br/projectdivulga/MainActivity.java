@@ -12,6 +12,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import divulga.com.br.projectdivulga.ModelDB.Cities;
+import divulga.com.br.projectdivulga.ModelDB.Establishments;
 import divulga.com.br.projectdivulga.fragments.Anuncie;
 import divulga.com.br.projectdivulga.fragments.Cidades;
 import divulga.com.br.projectdivulga.fragments.Estabelecimentos;
@@ -23,6 +25,9 @@ public class MainActivity extends BaseActivity
 
 
     public static MainActivity mainActivity;
+
+    public Cities selectedCity;
+    public Establishments selectedEstablishment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
