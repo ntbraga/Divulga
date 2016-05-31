@@ -12,14 +12,14 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import divulga.com.br.projectdivulga.ModelDB.City;
+import divulga.com.br.projectdivulga.ModelDB.Cities;
 import divulga.com.br.projectdivulga.R;
 import divulga.com.br.projectdivulga.Utils.CityAdapter;
 import divulga.com.br.projectdivulga.Utils.DividerItemDecoration;
 
 public class Cidades extends Fragment {
 
-    private List<City> cityList = new ArrayList<>();
+    private List<Cities> cityList = new ArrayList<>();
     private RecyclerView recyclerView;
     private CityAdapter cityAdapter;
 
@@ -51,7 +51,7 @@ public class Cidades extends Fragment {
 
     private void prepareMovieData() {
         for(int i = 0; i<20; i++){
-            cityList.add(new City(i, "Cidade "+i, "Minas Gerais"));
+            cityList.add(new Cities(i, "Cidade "+i, "Minas Gerais"));
         }
         cityAdapter.notifyDataSetChanged();
     }

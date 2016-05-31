@@ -11,14 +11,14 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import divulga.com.br.projectdivulga.ModelDB.City;
+import divulga.com.br.projectdivulga.ModelDB.Cities;
 import divulga.com.br.projectdivulga.R;
 
 /**
  * Created by Taty Braga on 30/05/2016.
  */
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> {
-    private List<City> cities;
+    private List<Cities> cities;
     private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -33,7 +33,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
         }
     }
 
-    public CityAdapter(List<City> cities, Context context){
+    public CityAdapter(List<Cities> cities, Context context){
         this.cities = cities;
         this.context = context;
     }
@@ -50,9 +50,9 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
     private static int border = 0;
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        City city = cities.get(position);
-        holder.name.setText(city.getName());
-        holder.state.setText(city.getState());
+        Cities city = cities.get(position);
+        holder.name.setText(city.getCity_name());
+        holder.state.setText(city.getCity_state());
         Drawable d = context.getDrawable(borders[border]);
         holder.border.setImageDrawable(d);
         switch(border){
