@@ -44,7 +44,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="@android:style/TextAppearance.Material.Medium"
                             android:textColor="#000"
-                            android:text="Descrição"/>
+                            android:text="@string/descri_o"/>
 
                         <TextView
                             android:id="@+id/estab_desc"
@@ -94,7 +94,7 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                                 android:textColor="#000"
-                                android:text="Endereço"/>
+                                android:text="@string/endere_o"/>
 
                             <TextView
                                 android:id="@+id/estab_address"
@@ -130,14 +130,14 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@android:style/TextAppearance.Material.Medium"
                     android:textColor="#000"
-                    android:text="Contatos"/>
+                    android:text="@string/contatos"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@android:style/TextAppearance.Material.Small"
                     android:textColor="#000"
-                    android:text="Telefones"
+                    android:text="@string/telefones"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"/>
 
@@ -155,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@android:style/TextAppearance.Material.Small"
                     android:textColor="#000"
-                    android:text="Emails"
+                    android:text="@string/emails"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"/>
 

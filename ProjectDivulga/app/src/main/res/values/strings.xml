@@ -98,4 +98,13 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="descri_o">Descrição</string>
+    <string name="endere_o">Endereço</string>
+    <string name="contatos">Contatos</string>
+    <string name="telefones">Telefones</string>
+    <string name="emails">Emails</string>
+    <string name="principal">Principal</string>
+    <string name="sobre">Sobre</string>
+    <string name="anuncie">Anuncie</string>
+    <string name="telefones_uteis">Telefones Uteis</string>
 </resources>

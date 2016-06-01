@@ -6,19 +6,19 @@
         <item
             android:id="@+id/nav_cidades"
             android:icon="@drawable/ic_home"
-            android:title="Principal" />
+            android:title="@string/principal" />
         <item
             android:id="@+id/nav_sobre"
             android:icon="@drawable/ic_info"
-            android:title="Sobre" />
+            android:title="@string/sobre" />
         <item
             android:id="@+id/nav_anuncie"
             android:icon="@drawable/ic_anounce"
-            android:title="Anuncie" />
+            android:title="@string/anuncie" />
         <item
             android:id="@+id/nav_tel"
             android:icon="@drawable/ic_call"
-            android:title="Telefones Uteis" />
+            android:title="@string/telefones_uteis" />
     </group>
 
 </menu>
