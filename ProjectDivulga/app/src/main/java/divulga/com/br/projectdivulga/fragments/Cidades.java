@@ -36,7 +36,7 @@ public class Cidades extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cidades, container, false);
-
+        MainActivity.mainActivity.toolbar.setTitle("Cidades");
         recyclerView = (RecyclerView) view.findViewById(R.id.city_rec);
 
         cityAdapter = new CityAdapter(cityList, view.getContext());
@@ -50,7 +50,7 @@ public class Cidades extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 MainActivity.mainActivity.selectedCity = cityList.get(position);
-                MainActivity.mainActivity.commitFragment("ESTABELECIMENTOS", "CIDADES");
+                MainActivity.mainActivity.commitFragment("CATEGORIAS", "CIDADES");
             }
 
             @Override

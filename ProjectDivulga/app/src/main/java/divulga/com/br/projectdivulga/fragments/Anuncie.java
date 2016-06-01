@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import divulga.com.br.projectdivulga.MainActivity;
 import divulga.com.br.projectdivulga.R;
 public class Anuncie extends Fragment {
 
@@ -19,7 +20,7 @@ public class Anuncie extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        MainActivity.mainActivity.toolbar.setTitle("Anuncie");
         return inflater.inflate(R.layout.fragment_anuncie, container, false);
     }
 

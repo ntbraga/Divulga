@@ -1,6 +1,7 @@
 package divulga.com.br.projectdivulga.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import divulga.com.br.projectdivulga.EstablishmentShow;
 import divulga.com.br.projectdivulga.MainActivity;
 import divulga.com.br.projectdivulga.ModelDB.Cities;
 import divulga.com.br.projectdivulga.ModelDB.Establishments;
@@ -40,7 +42,7 @@ public class Estabelecimentos extends Fragment {
         }
 
         recyclerView = (RecyclerView) view.findViewById(R.id.estab_rec);
-
+        MainActivity.mainActivity.toolbar.setTitle(MainActivity.mainActivity.selectedCity.getCity_name()+" - "+MainActivity.mainActivity.selectedCategory.getCat_name());
         estabAdapter = new EstabAdapter(estabList, view.getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -52,6 +54,8 @@ public class Estabelecimentos extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 MainActivity.mainActivity.selectedEstablishment = estabList.get(position);
+                Intent intent = new Intent(MainActivity.mainActivity, EstablishmentShow.class);
+                MainActivity.mainActivity.startActivity(intent);
             }
 
             @Override

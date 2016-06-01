@@ -21,48 +21,68 @@ import java.util.Map;
  * Created by Taty Braga on 30/05/2016.
  */
 public class BaseActivity extends AppCompatActivity{
-
+    public String lastUsed = null;
+    public String inUse = null;
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
-        } else if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+            inUse = lastUsed;
+            lastUsed = null;
+            if(inUse != null){
+                int id = ids.get(inUse);
+                if(id != -1){
+                    MainActivity.mainActivity.navigationView.setCheckedItem(id);
+                }
+            }
+        }else if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            finish();
+            moveTaskToBack(true);
         }
     }
 
-    Map<String, Fragment> frags = new HashMap<>();
+    Map<String, Class<? extends Fragment>> frags = new HashMap<>();
+    public Map<String, Integer> ids = new HashMap<>();
 
-    public Map<String, Fragment> getFrags() {
+    public Map<String, Class<? extends Fragment>> getFrags() {
         return frags;
     }
 
-    public void addFragment(Class<? extends Fragment> clazz, String tag){
+    public Map<String, Integer> getIds() {
+        return ids;
+    }
+
+    public void addFragment(Class<? extends Fragment> clazz, String tag, int id){
+        frags.put(tag, clazz);
+        ids.put(tag, id);
+    }
+
+    public void commitFragment(final String frag, final String onBack){
+        Handler handlerTimer = new Handler();
+        Fragment fragment = null;
         try {
-            frags.put(tag, clazz.newInstance());
+            fragment = getFrags().get(frag).newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-    }
-
-    public String commitFragment(final String frag, final String onBack){
-        Handler handlerTimer = new Handler();
-        final Fragment fragment = getFrags().get(frag);
+        final Fragment finalFrag = fragment;
         handlerTimer.postDelayed(new Runnable() {
             @Override
             public void run() {
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, frag);
-                if(onBack != null) transaction.addToBackStack(onBack);
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, finalFrag, frag);
+                if(onBack != null && !frag.equals(onBack)) transaction.addToBackStack(onBack);
                 transaction.commit();
             }
         }, 300);
-        return frag;
+        inUse = frag;
+        lastUsed = onBack;
     }
 
     @Override

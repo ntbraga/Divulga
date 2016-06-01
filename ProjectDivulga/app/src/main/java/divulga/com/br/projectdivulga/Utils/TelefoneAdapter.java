@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class TelefoneAdapter extends RecyclerView.Adapter<TelefoneAdapter.MyView
             super(view);
             name = (TextView) view.findViewById(R.id.tel_name);
             tel = (TextView) view.findViewById(R.id.tel_num);
-            ico = (ImageView) view.findViewById(R.id.tel_ico);
+            ico = (ImageView) view.findViewById(R.id.tel_icon);
             fab = (FloatingActionButton) view.findViewById(R.id.tel_fab_call);
         }
     }
@@ -44,17 +45,23 @@ public class TelefoneAdapter extends RecyclerView.Adapter<TelefoneAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.city_rec_layout, parent, false);
+                .inflate(R.layout.tel_util_rec_layout, parent, false);
 
         return new MyViewHolder(itemView);
     }
 
-    private int borders[] = new int[]{R.drawable.linear_border, R.drawable.linear_border2, R.drawable.linear_border3};
-    private static int border = 0;
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-
-
+        final TelefoneUtil util = utils.get(position);
+        holder.name.setText(util.getName());
+        holder.tel.setText(util.getTel());
+        holder.ico.setImageDrawable(util.getIcon());
+        holder.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "ligar para "+util.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

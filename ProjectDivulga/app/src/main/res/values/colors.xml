@@ -6,4 +6,7 @@
     <color name="colorBorder0">#448AFF</color>
     <color name="colorBorder1">#F44333</color>
     <color name="colorBorder2">#009688</color>
+
+    <color name="viewBg">#f1f5f8</color>
+    <color name="album_title">#4c4c4c</color>
 </resources>
