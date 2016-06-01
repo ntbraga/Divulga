@@ -21,4 +21,5 @@
     <string name="sobre_frag">SOBRE</string>
     <string name="tel_frag">TELEFONES</string>
     <string name="cat_frag">CATEGORIAS</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

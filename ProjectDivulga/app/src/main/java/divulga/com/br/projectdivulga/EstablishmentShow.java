@@ -15,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -59,6 +60,15 @@ public class EstablishmentShow extends BaseActivity {
 
         descricao.setText("Short Description");
         endereco.setText(getAddressConcat());
+
+        LinearLayout layout = (LinearLayout)findViewById(R.id.showLocationL);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EstablishmentShow.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void prepareContactData() {
