@@ -84,7 +84,6 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
@@ -99,8 +98,7 @@ public class MainActivity extends BaseActivity
         }else if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            finish();
-            moveTaskToBack(true);
+            super.onBackPressed();
         }
     }
 }
