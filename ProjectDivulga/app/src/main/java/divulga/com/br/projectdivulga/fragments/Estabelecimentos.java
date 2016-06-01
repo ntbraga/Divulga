@@ -54,8 +54,8 @@ public class Estabelecimentos extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 MainActivity.mainActivity.selectedEstablishment = estabList.get(position);
-                Intent intent = new Intent(MainActivity.mainActivity, EstablishmentShow.class);
-                MainActivity.mainActivity.startActivity(intent);
+                Intent intent = new Intent(getActivity(), EstablishmentShow.class);
+                getActivity().startActivity(intent);
             }
 
             @Override

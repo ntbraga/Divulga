@@ -85,20 +85,22 @@ public class MainActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
-            inUse = lastUsed;
-            lastUsed = null;
-            if(inUse != null){
-                int id = ids.get(inUse);
-                if(id != -1){
-                    MainActivity.mainActivity.navigationView.setCheckedItem(id);
-                }
-            }
-        }else if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                getSupportFragmentManager().popBackStack();
+                inUse = lastUsed;
+                lastUsed = null;
+                if(inUse != null){
+                    int id = ids.get(inUse);
+                    if(id != -1){
+                        MainActivity.mainActivity.navigationView.setCheckedItem(id);
+                    }
+                }
+            }else{
+                super.onBackPressed();
+            }
         }
     }
 }
