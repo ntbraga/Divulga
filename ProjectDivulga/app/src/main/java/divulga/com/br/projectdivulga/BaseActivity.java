@@ -24,28 +24,6 @@ public class BaseActivity extends AppCompatActivity{
     public String lastUsed = null;
     public String inUse = null;
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
-            inUse = lastUsed;
-            lastUsed = null;
-            if(inUse != null){
-                int id = ids.get(inUse);
-                if(id != -1){
-                    MainActivity.mainActivity.navigationView.setCheckedItem(id);
-                }
-            }
-        }else if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            finish();
-            moveTaskToBack(true);
-        }
-    }
-
     Map<String, Class<? extends Fragment>> frags = new HashMap<>();
     public Map<String, Integer> ids = new HashMap<>();
 
@@ -77,7 +55,7 @@ public class BaseActivity extends AppCompatActivity{
             @Override
             public void run() {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, finalFrag, frag);
-                if(onBack != null && !frag.equals(onBack)) transaction.addToBackStack(onBack);
+                if(onBack != null && !frag.equals(onBack)) transaction.addToBackStack(null);
                 transaction.commit();
             }
         }, 300);
