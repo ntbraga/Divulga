@@ -68,7 +68,7 @@ public class Estabelecimentos extends Fragment {
 
     private void prepareMovieData() {
         for(int i = 0; i<5; i++){
-            estabList.add(new Establishments(i, "Estabelecimento x "+i+""));
+            estabList.add(new Establishments(i, "Estabelecimento big name x "+i+""));
         }
         estabAdapter.notifyDataSetChanged();
     }

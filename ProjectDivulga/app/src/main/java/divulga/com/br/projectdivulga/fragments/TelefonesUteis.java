@@ -37,7 +37,7 @@ public class TelefonesUteis extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_telefones_uteis, container, false);
 
-        MainActivity.mainActivity.toolbar.setTitle("Telefones Uteis");
+        MainActivity.mainActivity.toolbar.setTitle(getString(R.string.telefones_uteis));
         recyclerView = (RecyclerView) view.findViewById(R.id.tel_util_rec);
 
         telAdapter = new TelefoneAdapter(telList, this);

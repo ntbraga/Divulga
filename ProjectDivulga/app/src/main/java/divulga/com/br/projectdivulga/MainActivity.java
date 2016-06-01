@@ -49,14 +49,14 @@ public class MainActivity extends BaseActivity
         toggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        addFragment(Anuncie.class, "ANUNCIE", R.id.nav_anuncie);
-        addFragment(Cidades.class, "CIDADES", R.id.nav_cidades);
-        addFragment(Estabelecimentos.class, "ESTABELECIMENTOS", -1);
-        addFragment(Sobre.class, "SOBRE", R.id.nav_sobre);
-        addFragment(TelefonesUteis.class, "TELEFONES", R.id.nav_tel);
-        addFragment(Categorias.class, "CATEGORIAS", -1);
+        addFragment(Anuncie.class, getString(R.string.anuncie_frag), R.id.nav_anuncie);
+        addFragment(Cidades.class, getString(R.string.cidades_frag), R.id.nav_cidades);
+        addFragment(Estabelecimentos.class, getString(R.string.estab_frag), -1);
+        addFragment(Sobre.class, getString(R.string.sobre_frag), R.id.nav_sobre);
+        addFragment(TelefonesUteis.class, getString(R.string.tel_frag), R.id.nav_tel);
+        addFragment(Categorias.class, getString(R.string.cat_frag), -1);
         if(inUse == null) {
-            commitFragment("CIDADES", null);
+            commitFragment(getString(R.string.cidades_frag), null);
             navigationView.setCheckedItem(R.id.nav_cidades);
         }else{
             commitFragment(inUse, lastUsed);
@@ -73,13 +73,13 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_cidades) {
-            commitFragment("CIDADES", null);
+            commitFragment(getString(R.string.cidades_frag), null);
         } else if (id == R.id.nav_sobre) {
-            commitFragment("SOBRE", "CIDADES");
+            commitFragment(getString(R.string.sobre_frag), getString(R.string.cidades_frag));
         } else if (id == R.id.nav_anuncie) {
-            commitFragment("ANUNCIE", "CIDADES");
+            commitFragment(getString(R.string.anuncie_frag), getString(R.string.cidades_frag));
         } else if (id == R.id.nav_tel) {
-            commitFragment("TELEFONES", "CIDADES");
+            commitFragment(getString(R.string.tel_frag), getString(R.string.cidades_frag));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

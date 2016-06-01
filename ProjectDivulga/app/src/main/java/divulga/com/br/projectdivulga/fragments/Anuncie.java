@@ -20,7 +20,7 @@ public class Anuncie extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        MainActivity.mainActivity.toolbar.setTitle("Anuncie");
+        MainActivity.mainActivity.toolbar.setTitle(getString(R.string.anuncie));
         return inflater.inflate(R.layout.fragment_anuncie, container, false);
     }
 
