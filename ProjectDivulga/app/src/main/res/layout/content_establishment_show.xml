@@ -47,6 +47,7 @@
                             android:text="Descrição"/>
 
                         <TextView
+                            android:id="@+id/estab_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Endereço xxxxxxxxxxx"
@@ -96,6 +97,7 @@
                                 android:text="Endereço"/>
 
                             <TextView
+                                android:id="@+id/estab_address"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Endereço xxxxxxxxxxx"
@@ -140,6 +142,7 @@
                     android:layout_marginBottom="10dp"/>
 
                 <android.support.v7.widget.RecyclerView
+                    android:id="@+id/tel_rec"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -157,6 +160,7 @@
                     android:layout_marginBottom="10dp"/>
 
                 <android.support.v7.widget.RecyclerView
+                    android:id="@+id/mail_rec"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 

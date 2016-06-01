@@ -1,13 +1,10 @@
 package divulga.com.br.projectdivulga.fragments;
 
-import android.content.Context;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -20,10 +17,8 @@ import java.util.List;
 import divulga.com.br.projectdivulga.MainActivity;
 import divulga.com.br.projectdivulga.ModelDB.Categories;
 import divulga.com.br.projectdivulga.R;
-import divulga.com.br.projectdivulga.Utils.CategoryAdapter;
-import divulga.com.br.projectdivulga.Utils.CityAdapter;
+import divulga.com.br.projectdivulga.Adapters.CategoryAdapter;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
-import divulga.com.br.projectdivulga.Utils.DividerItemDecoration;
 import divulga.com.br.projectdivulga.Utils.GridSpacingItemDecoration;
 
 public class Categorias extends Fragment {
@@ -44,9 +39,9 @@ public class Categorias extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.cat_rec);
 
         categoryAdapter = new CategoryAdapter(categories, view.getContext());
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(view.getContext(), 3);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(view.getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
-        //recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(5), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(categoryAdapter);
 

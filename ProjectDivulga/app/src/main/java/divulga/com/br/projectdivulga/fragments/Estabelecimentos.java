@@ -1,8 +1,6 @@
 package divulga.com.br.projectdivulga.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -22,8 +20,7 @@ import divulga.com.br.projectdivulga.ModelDB.Cities;
 import divulga.com.br.projectdivulga.ModelDB.Establishments;
 import divulga.com.br.projectdivulga.R;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
-import divulga.com.br.projectdivulga.Utils.DividerItemDecoration;
-import divulga.com.br.projectdivulga.Utils.EstabAdapter;
+import divulga.com.br.projectdivulga.Adapters.EstabAdapter;
 
 public class Estabelecimentos extends Fragment {
 

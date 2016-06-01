@@ -1,4 +1,4 @@
-package divulga.com.br.projectdivulga.Utils;
+package divulga.com.br.projectdivulga.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

@@ -1,8 +1,8 @@
 package divulga.com.br.projectdivulga.fragments;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +17,7 @@ import java.util.List;
 import divulga.com.br.projectdivulga.MainActivity;
 import divulga.com.br.projectdivulga.ModelDB.TelefoneUtil;
 import divulga.com.br.projectdivulga.R;
-import divulga.com.br.projectdivulga.Utils.TelefoneAdapter;
+import divulga.com.br.projectdivulga.Adapters.TelefoneAdapter;
 
 
 public class TelefonesUteis extends Fragment {
@@ -40,11 +40,12 @@ public class TelefonesUteis extends Fragment {
         MainActivity.mainActivity.toolbar.setTitle("Telefones Uteis");
         recyclerView = (RecyclerView) view.findViewById(R.id.tel_util_rec);
 
-        telAdapter = new TelefoneAdapter(telList, view.getContext());
+        telAdapter = new TelefoneAdapter(telList, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(telAdapter);
+
         prepareData();
         return view;
     }
@@ -59,6 +60,7 @@ public class TelefonesUteis extends Fragment {
         super.onDestroyView();
     }
 
+
     private void prepareData(){
         telList.add(new TelefoneUtil("ANEEL", "167", getContext().getDrawable(R.drawable.ic_taxi)));
         telList.add(new TelefoneUtil("Corpo de Bombeiros", "193", getContext().getDrawable(R.drawable.ic_taxi)));
@@ -67,8 +69,6 @@ public class TelefonesUteis extends Fragment {
         telList.add(new TelefoneUtil("Polícia Militar", "190", getContext().getDrawable(R.drawable.ic_taxi)));
         telList.add(new TelefoneUtil("Procon", "151", getContext().getDrawable(R.drawable.ic_taxi)));
         telList.add(new TelefoneUtil("SAMU", "192", getContext().getDrawable(R.drawable.ic_taxi)));
-
-
         telAdapter.notifyDataSetChanged();
     }
 }

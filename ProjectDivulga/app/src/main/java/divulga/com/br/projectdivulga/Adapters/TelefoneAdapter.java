@@ -1,28 +1,31 @@
-package divulga.com.br.projectdivulga.Utils;
+package divulga.com.br.projectdivulga.Adapters;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import divulga.com.br.projectdivulga.ModelDB.Cities;
+import divulga.com.br.projectdivulga.MainActivity;
 import divulga.com.br.projectdivulga.R;
 import divulga.com.br.projectdivulga.ModelDB.TelefoneUtil;
 
 /**
  * Created by Taty Braga on 31/05/2016.
  */
-public class TelefoneAdapter extends RecyclerView.Adapter<TelefoneAdapter.MyViewHolder>{
+public class TelefoneAdapter extends RecyclerView.Adapter<TelefoneAdapter.MyViewHolder> {
     private List<TelefoneUtil> utils;
-    private Context context;
+    private Fragment context;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name, tel;
         public ImageView ico;
@@ -34,12 +37,13 @@ public class TelefoneAdapter extends RecyclerView.Adapter<TelefoneAdapter.MyView
             tel = (TextView) view.findViewById(R.id.tel_num);
             ico = (ImageView) view.findViewById(R.id.tel_icon);
             fab = (FloatingActionButton) view.findViewById(R.id.tel_fab_call);
+            this.setIsRecyclable(false);
         }
     }
 
-    public TelefoneAdapter(List<TelefoneUtil> utils, Context context){
+    public TelefoneAdapter(List<TelefoneUtil> utils, Fragment fragment) {
         this.utils = utils;
-        this.context = context;
+        this.context = fragment;
     }
 
     @Override
@@ -59,10 +63,11 @@ public class TelefoneAdapter extends RecyclerView.Adapter<TelefoneAdapter.MyView
         holder.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "ligar para "+util.getName(), Toast.LENGTH_SHORT).show();
+                MainActivity.mainActivity.doCall(util.getTel());
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

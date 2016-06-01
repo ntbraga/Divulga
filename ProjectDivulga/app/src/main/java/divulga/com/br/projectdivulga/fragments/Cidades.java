@@ -15,7 +15,7 @@ import java.util.List;
 import divulga.com.br.projectdivulga.MainActivity;
 import divulga.com.br.projectdivulga.ModelDB.Cities;
 import divulga.com.br.projectdivulga.R;
-import divulga.com.br.projectdivulga.Utils.CityAdapter;
+import divulga.com.br.projectdivulga.Adapters.CityAdapter;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
 import divulga.com.br.projectdivulga.Utils.DividerItemDecoration;
 

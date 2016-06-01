@@ -1,7 +1,13 @@
 package divulga.com.br.projectdivulga;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -102,5 +108,46 @@ public class MainActivity extends BaseActivity
                 super.onBackPressed();
             }
         }
+    }
+
+    private Intent call = null;
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 10: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    if (call != null) {
+                        startActivity(call);
+                    }
+                }
+                break;
+            }
+
+            default:{
+
+            }
+        }
+    }
+
+    public void doCall(String number){
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:"+number));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.mainActivity,
+                    new String[]{Manifest.permission.CALL_PHONE}, 10);
+            call = callIntent;
+            return;
+        }
+        startActivity(callIntent);
+    }
+
+    public void sendMail(String mail){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Uri data = Uri.parse("mailto:" + mail);
+        intent.setData(data);
+        startActivity(intent);
     }
 }
