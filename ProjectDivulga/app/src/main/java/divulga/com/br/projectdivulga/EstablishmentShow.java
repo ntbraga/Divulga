@@ -62,13 +62,15 @@ public class EstablishmentShow extends BaseActivity {
         endereco.setText(getAddressConcat());
 
         LinearLayout layout = (LinearLayout)findViewById(R.id.showLocationL);
-        layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(EstablishmentShow.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
+        if (layout != null) {
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(EstablishmentShow.this, MapsActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     private void prepareContactData() {
