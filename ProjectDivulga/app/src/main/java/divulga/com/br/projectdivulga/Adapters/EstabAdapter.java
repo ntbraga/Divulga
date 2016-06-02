@@ -32,7 +32,6 @@ public class EstabAdapter extends RecyclerView.Adapter<EstabAdapter.EstabViewHol
         public ImageView image;
         public FloatingActionButton fav_fab;
         public RelativeLayout clickLayout;
-        public boolean fav;
         public EstabViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.estab_name);
@@ -65,7 +64,6 @@ public class EstabAdapter extends RecyclerView.Adapter<EstabAdapter.EstabViewHol
         final Establishments estab = estabs.get(position);
         holder.name.setText(estab.getEstab_name());
         holder.fav_fab.setImageDrawable(context.getDrawable(star));
-        holder.fav = false;
         holder.image.setImageDrawable(context.getDrawable(colors[color]));
         switch(color){
             case 0:
@@ -78,8 +76,8 @@ public class EstabAdapter extends RecyclerView.Adapter<EstabAdapter.EstabViewHol
         holder.fav_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.fav = !holder.fav;
-                if(holder.fav){
+                estab.setFavorite(!estab.isFavorite());
+                if(estab.isFavorite()){
                     holder.fav_fab.setImageDrawable(context.getDrawable(star_selected));
                 }else{
                     holder.fav_fab.setImageDrawable(context.getDrawable(star));
