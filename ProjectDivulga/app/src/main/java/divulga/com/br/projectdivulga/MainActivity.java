@@ -21,6 +21,7 @@ import divulga.com.br.projectdivulga.fragments.Anuncie;
 import divulga.com.br.projectdivulga.fragments.Categorias;
 import divulga.com.br.projectdivulga.fragments.Cidades;
 import divulga.com.br.projectdivulga.fragments.Estabelecimentos;
+import divulga.com.br.projectdivulga.fragments.Favoritos;
 import divulga.com.br.projectdivulga.fragments.Sobre;
 import divulga.com.br.projectdivulga.fragments.TelefonesUteis;
 
@@ -55,6 +56,7 @@ public class MainActivity extends BaseActivity
         addFragment(Sobre.class, getString(R.string.sobre_frag), R.id.nav_sobre);
         addFragment(TelefonesUteis.class, getString(R.string.tel_frag), R.id.nav_tel);
         addFragment(Categorias.class, getString(R.string.cat_frag), -1);
+        addFragment(Favoritos.class, getString(R.string.fav_frag), R.id.nav_fav);
         if(inUse == null) {
             commitFragment(getString(R.string.cidades_frag), null);
             navigationView.setCheckedItem(R.id.nav_cidades);
@@ -80,6 +82,8 @@ public class MainActivity extends BaseActivity
             commitFragment(getString(R.string.anuncie_frag), getString(R.string.cidades_frag));
         } else if (id == R.id.nav_tel) {
             commitFragment(getString(R.string.tel_frag), getString(R.string.cidades_frag));
+        } else if (id == R.id.nav_fav) {
+            commitFragment(getString(R.string.fav_frag), getString(R.string.cidades_frag));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

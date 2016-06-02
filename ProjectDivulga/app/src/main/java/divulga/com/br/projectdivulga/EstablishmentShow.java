@@ -125,7 +125,6 @@ public class EstablishmentShow extends BaseActivity {
             contactsPhone.add(new Contacts(i, "(33) 9 8888-888"+i, ContactAdapter.ContactType.TELEPHONE));
         }
 
-
         telAdapter.notifyDataSetChanged();
         mailAdapter.notifyDataSetChanged();
     }

@@ -11,6 +11,7 @@
     <string name="contatos">Contatos</string>
     <string name="telefones">Telefones</string>
     <string name="emails">Emails</string>
+    <string name="favoritos">Favoritos</string>
     <string name="principal">Principal</string>
     <string name="sobre">Sobre</string>
     <string name="anuncie">Anuncie</string>
@@ -21,5 +22,8 @@
     <string name="sobre_frag">SOBRE</string>
     <string name="tel_frag">TELEFONES</string>
     <string name="cat_frag">CATEGORIAS</string>
+    <string name="fav_frag">FAVORITOS</string>
     <string name="title_activity_maps">Map</string>
+
+
 </resources>

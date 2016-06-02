@@ -4,9 +4,65 @@
     android:layout_height="match_parent"
     tools:context=".fragments.Anuncie">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="30dp"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/anuncie_nome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:layout_margin="5dp"
+                android:hint="Nome"/>
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/anuncie_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:layout_margin="5dp"
+                android:hint="Email"/>
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/anuncie_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:layout_margin="5dp"
+                android:hint="Telefone"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/anuncie_assunto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_margin="5dp"
+                android:hint="Assunto"/>
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/anuncie_message"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textLongMessage|textMultiLine|textCapSentences"
+                android:layout_margin="5dp"
+                android:hint="Mensagem"/>
+
+        </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/anuncie_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_mail"
+        android:layout_margin="20dp"
+        android:tint="#FFF"
+        android:layout_gravity="bottom|end"/>
 
 </FrameLayout>
