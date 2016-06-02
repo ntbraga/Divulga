@@ -13,11 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import divulga.com.br.projectdivulga.MainActivity;
+import divulga.com.br.projectdivulga.ModelDB.Categories;
 import divulga.com.br.projectdivulga.ModelDB.Cities;
 import divulga.com.br.projectdivulga.R;
 import divulga.com.br.projectdivulga.Adapters.CityAdapter;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
 import divulga.com.br.projectdivulga.Utils.DividerItemDecoration;
+import divulga.com.br.projectdivulga.rest.RealmController;
 
 public class Cidades extends Fragment {
 
@@ -67,9 +69,8 @@ public class Cidades extends Fragment {
 
 
     private void prepareMovieData() {
-        for(int i = 0; i<20; i++){
-            cityList.add(new Cities(i, "Cidade "+i, "Minas Gerais"));
-        }
+        if(RealmController.getInstance().has(Cities.class))
+            cityList.addAll(RealmController.getInstance().getAll(Cities.class));
         cityAdapter.notifyDataSetChanged();
     }
 

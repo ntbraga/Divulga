@@ -14,20 +14,6 @@ public class Contacts extends RealmObject{
 	private int id_estab;
 	private String contact_email;
 
-    public Contacts(int id, String contact, ContactAdapter.ContactType type){
-        this.id = id;
-        switch (type){
-            case EMAIL:{
-                this.contact_email = contact;
-                break;
-            }
-            case TELEPHONE:{
-                this.contact_phone = contact;
-                break;
-            }
-        }
-    }
-
     public Contacts(){}
 
     public int getId() {

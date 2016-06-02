@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     tools:context=".fragments.Cidades">
 
+    <include layout="@layout/empty_rec" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/city_rec"
         android:layout_width="match_parent"

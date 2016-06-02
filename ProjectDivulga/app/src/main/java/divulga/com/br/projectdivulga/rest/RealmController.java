@@ -51,7 +51,6 @@ public class RealmController {
     }
 
     public static RealmController getInstance() {
-
         return instance;
     }
 
@@ -60,15 +59,10 @@ public class RealmController {
         return realm;
     }
 
-    //Refresh the realm istance
-    public void refresh() {
-        realm.refresh();
-    }
-
     //clear all objects from Book.class
     public void clearAll(Class<? extends RealmObject> clazz) {
         realm.beginTransaction();
-        realm.clear(clazz);
+        realm.where(clazz).findAll().deleteAllFromRealm();
         realm.commitTransaction();
     }
 
@@ -78,14 +72,16 @@ public class RealmController {
     }
 
     //query a single item with the given id
-    public <T extends RealmObject> T get(Class<T> clazz, String id) {
+    public <T extends RealmObject> T get(Class<T> clazz, int id) {
         return realm.where(clazz).equalTo("id", id).findFirst();
     }
 
     //check if Book.class is empty
     public boolean has(Class<? extends RealmObject> clazz) {
-        return !realm.allObjects(clazz).isEmpty();
+        return realm.where(clazz).count() > 0;
     }
+
+
 
     public RealmResults<Establishments> getAllEstablishmentsFavorites(){
         return realm.where(Establishments.class).equalTo("favorite", true).findAll();
@@ -108,6 +104,12 @@ public class RealmController {
             }
             realm.copyToRealm(est);
         }
+        realm.commitTransaction();
+    }
+
+    public void setEstablishmentFavorite(Establishments establishment, boolean favorite){
+        realm.beginTransaction();
+        get(Establishments.class, establishment.getId()).setFavorite(favorite);
         realm.commitTransaction();
     }
 

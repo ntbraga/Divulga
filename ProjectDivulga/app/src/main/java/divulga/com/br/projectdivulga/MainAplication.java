@@ -2,6 +2,7 @@ package divulga.com.br.projectdivulga;
 
 import android.app.Application;
 
+import divulga.com.br.projectdivulga.rest.RealmController;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -16,10 +17,10 @@ public class MainAplication extends Application {
         super.onCreate();
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this)
                 .name(Realm.DEFAULT_REALM_NAME)
-                .schemaVersion(0)
+                .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
-
+        RealmController.with(this);
     }
 }

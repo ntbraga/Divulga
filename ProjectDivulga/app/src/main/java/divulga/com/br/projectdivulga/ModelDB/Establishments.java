@@ -26,11 +26,6 @@ public class Establishments extends RealmObject{
 
     public Establishments(){}
 
-    public Establishments(int id_city, String estab_name){
-        this.id_city = id_city;
-        this.estab_name = estab_name;
-    }
-
     public int getId() {
         return id;
     }

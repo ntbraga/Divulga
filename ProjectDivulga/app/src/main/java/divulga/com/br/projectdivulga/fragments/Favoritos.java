@@ -22,6 +22,7 @@ import divulga.com.br.projectdivulga.MainActivity;
 import divulga.com.br.projectdivulga.ModelDB.Establishments;
 import divulga.com.br.projectdivulga.R;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
+import divulga.com.br.projectdivulga.rest.RealmController;
 
 public class Favoritos extends Fragment {
     private List<Establishments> estabList = new ArrayList<>();
@@ -33,7 +34,6 @@ public class Favoritos extends Fragment {
                              Bundle savedInstanceState) {
         MainActivity.mainActivity.toolbar.setTitle(getString(R.string.favoritos));
         View view = inflater.inflate(R.layout.fragment_favoritos, container, false);
-
         recyclerView = (RecyclerView) view.findViewById(R.id.fav_rec);
 
         estabAdapter = new EstabAdapter(estabList, view.getContext());
@@ -49,9 +49,8 @@ public class Favoritos extends Fragment {
     }
 
     private void prepareData() {
-        for(int i = 0; i<5; i++){
-            estabList.add(new Establishments(i, "Estabelecimento big name x "+i+""));
-        }
+        if(RealmController.getInstance().has(Establishments.class))
+            estabList.addAll(RealmController.getInstance().getAllEstablishmentsFavorites());
         estabAdapter.notifyDataSetChanged();
     }
 

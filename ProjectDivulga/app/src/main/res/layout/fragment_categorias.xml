@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     tools:context=".fragments.Categorias">
 
+    <include layout="@layout/empty_rec" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cat_rec"
         android:layout_width="match_parent"

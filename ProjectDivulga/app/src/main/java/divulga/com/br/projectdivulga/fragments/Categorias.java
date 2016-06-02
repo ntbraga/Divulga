@@ -20,6 +20,8 @@ import divulga.com.br.projectdivulga.R;
 import divulga.com.br.projectdivulga.Adapters.CategoryAdapter;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
 import divulga.com.br.projectdivulga.Utils.GridSpacingItemDecoration;
+import divulga.com.br.projectdivulga.rest.RealmController;
+import io.realm.RealmObject;
 
 public class Categorias extends Fragment {
     private List<Categories> categories = new ArrayList<>();
@@ -69,10 +71,8 @@ public class Categorias extends Fragment {
     }
 
     void prepareData(){
-
-        for(int i = 0; i<20; i++){
-            categories.add(new Categories(i, "Categoria "+i));
-        }
+        if(RealmController.getInstance().has(Categories.class))
+            categories.addAll(RealmController.getInstance().getAll(Categories.class));
 
         categoryAdapter.notifyDataSetChanged();
     }

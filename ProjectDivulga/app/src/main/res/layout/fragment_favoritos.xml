@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     tools:context="divulga.com.br.projectdivulga.fragments.Favoritos">
 
+    <include layout="@layout/empty_rec" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/fav_rec"

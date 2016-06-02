@@ -24,6 +24,7 @@
     <string name="cat_frag">CATEGORIAS</string>
     <string name="fav_frag">FAVORITOS</string>
     <string name="title_activity_maps">Map</string>
+    <string name="empty_text">Nenhum item encontrado!</string>
 
 
 </resources>

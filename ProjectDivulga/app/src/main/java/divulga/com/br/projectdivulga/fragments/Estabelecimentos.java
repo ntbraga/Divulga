@@ -21,6 +21,7 @@ import divulga.com.br.projectdivulga.ModelDB.Establishments;
 import divulga.com.br.projectdivulga.R;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
 import divulga.com.br.projectdivulga.Adapters.EstabAdapter;
+import divulga.com.br.projectdivulga.rest.RealmController;
 
 public class Estabelecimentos extends Fragment {
 
@@ -34,9 +35,6 @@ public class Estabelecimentos extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_estabelecimentos, container, false);
         city = MainActivity.mainActivity.selectedCity;
-        if(city != null){
-            Toast.makeText(view.getContext(), "SELECTED: "+city.getCity_name(), Toast.LENGTH_SHORT).show();
-        }
 
         recyclerView = (RecyclerView) view.findViewById(R.id.estab_rec);
         MainActivity.mainActivity.toolbar.setTitle(MainActivity.mainActivity.selectedCity.getCity_name()+" - "+MainActivity.mainActivity.selectedCategory.getCat_name());
@@ -54,9 +52,8 @@ public class Estabelecimentos extends Fragment {
     }
 
     private void prepareMovieData() {
-        for(int i = 0; i<5; i++){
-            estabList.add(new Establishments(i, "Estabelecimento big name x "+i+""));
-        }
+        if(RealmController.getInstance().has(Establishments.class))
+            estabList.addAll(RealmController.getInstance().getAll(Establishments.class));
         estabAdapter.notifyDataSetChanged();
     }
 

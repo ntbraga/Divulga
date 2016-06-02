@@ -120,10 +120,7 @@ public class EstablishmentShow extends BaseActivity {
 
     private void prepareData(){
 
-        for(int i = 0; i<5; i++){
-            contactsMail.add(new Contacts(i, "contact"+i+"@divulga.com.br", ContactAdapter.ContactType.EMAIL));
-            contactsPhone.add(new Contacts(i, "(33) 9 8888-888"+i, ContactAdapter.ContactType.TELEPHONE));
-        }
+        // TODO
 
         telAdapter.notifyDataSetChanged();
         mailAdapter.notifyDataSetChanged();

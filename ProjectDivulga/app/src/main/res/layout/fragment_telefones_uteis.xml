@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     tools:context=".fragments.TelefonesUteis">
 
+    <include layout="@layout/empty_rec" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/tel_util_rec"
         android:layout_width="match_parent"

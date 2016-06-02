@@ -13,11 +13,6 @@ public class Categories extends RealmObject{
 
     public Categories(){}
 
-    public Categories(int id, String cat_name){
-        this.id = id;
-        this.cat_name = cat_name;
-    }
-
     public int getId() {
         return id;
     }

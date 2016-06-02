@@ -7,6 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `mydb` ;
 
 -- -----------------------------------------------------
 -- Schema mydb
@@ -17,6 +18,8 @@ USE `mydb` ;
 -- -----------------------------------------------------
 -- Table `mydb`.`Cities`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Cities` ;
+
 CREATE TABLE IF NOT EXISTS `mydb`.`Cities` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `city_name` VARCHAR(45) NOT NULL,
@@ -29,17 +32,28 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`Categories`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Categories` ;
+
 CREATE TABLE IF NOT EXISTS `mydb`.`Categories` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_city` INT UNSIGNED NOT NULL,
   `cat_name` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
+  PRIMARY KEY (`id`, `id_city`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `fk_Categories_Cities1_idx` (`id_city` ASC),
+  CONSTRAINT `fk_Categories_Cities1`
+    FOREIGN KEY (`id_city`)
+    REFERENCES `mydb`.`Cities` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Establishments`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Establishments` ;
+
 CREATE TABLE IF NOT EXISTS `mydb`.`Establishments` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_city` INT UNSIGNED NOT NULL,
@@ -71,6 +85,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`Contacts`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Contacts` ;
+
 CREATE TABLE IF NOT EXISTS `mydb`.`Contacts` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_estab` INT UNSIGNED NOT NULL,

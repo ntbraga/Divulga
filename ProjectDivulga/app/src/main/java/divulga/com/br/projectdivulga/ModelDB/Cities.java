@@ -14,12 +14,6 @@ public class Cities extends RealmObject{
 
     public Cities(){}
 
-    public Cities(int id, String city_name, String city_state){
-        this.id = id;
-        this.city_name = city_name;
-        this.city_state = city_state;
-    }
-
     public int getId() {
         return id;
     }
