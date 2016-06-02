@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class Cidades extends Fragment {
     private List<Cities> cityList = new ArrayList<>();
     private RecyclerView recyclerView;
     private CityAdapter cityAdapter;
-
+    private RelativeLayout layout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class Cidades extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cidades, container, false);
         MainActivity.mainActivity.toolbar.setTitle("Cidades");
         recyclerView = (RecyclerView) view.findViewById(R.id.city_rec);
-
+        layout = (RelativeLayout) view.findViewById(R.id.empty_rec);
         cityAdapter = new CityAdapter(cityList, view.getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -71,6 +72,8 @@ public class Cidades extends Fragment {
     private void prepareMovieData() {
         if(RealmController.getInstance().has(Cities.class))
             cityList.addAll(RealmController.getInstance().getAll(Cities.class));
+        if(!cityList.isEmpty())
+            layout.setVisibility(View.GONE);
         cityAdapter.notifyDataSetChanged();
     }
 

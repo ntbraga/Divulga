@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -28,14 +29,14 @@ public class Favoritos extends Fragment {
     private List<Establishments> estabList = new ArrayList<>();
     private RecyclerView recyclerView;
     private EstabAdapter estabAdapter;
-
+    private RelativeLayout layout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         MainActivity.mainActivity.toolbar.setTitle(getString(R.string.favoritos));
         View view = inflater.inflate(R.layout.fragment_favoritos, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.fav_rec);
-
+        layout = (RelativeLayout) view.findViewById(R.id.empty_rec);
         estabAdapter = new EstabAdapter(estabList, view.getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -51,6 +52,9 @@ public class Favoritos extends Fragment {
     private void prepareData() {
         if(RealmController.getInstance().has(Establishments.class))
             estabList.addAll(RealmController.getInstance().getAllEstablishmentsFavorites());
+
+        if(!estabList.isEmpty())
+            layout.setVisibility(View.GONE);
         estabAdapter.notifyDataSetChanged();
     }
 

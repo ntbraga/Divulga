@@ -10,6 +10,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class Categorias extends Fragment {
     private List<Categories> categories = new ArrayList<>();
     private RecyclerView recyclerView;
     private CategoryAdapter categoryAdapter;
+    private RelativeLayout layout;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,7 @@ public class Categorias extends Fragment {
         View view = inflater.inflate(R.layout.fragment_categorias, container, false);
         MainActivity.mainActivity.toolbar.setTitle(MainActivity.mainActivity.selectedCity.getCity_name());
         recyclerView = (RecyclerView) view.findViewById(R.id.cat_rec);
-
+        layout = (RelativeLayout) view.findViewById(R.id.empty_rec);
         categoryAdapter = new CategoryAdapter(categories, view.getContext());
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(view.getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -73,7 +75,8 @@ public class Categorias extends Fragment {
     void prepareData(){
         if(RealmController.getInstance().has(Categories.class))
             categories.addAll(RealmController.getInstance().getAll(Categories.class));
-
+        if(!categories.isEmpty())
+            layout.setVisibility(View.GONE);
         categoryAdapter.notifyDataSetChanged();
     }
 

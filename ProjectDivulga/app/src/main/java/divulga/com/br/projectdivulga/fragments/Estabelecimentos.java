@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class Estabelecimentos extends Fragment {
     private List<Establishments> estabList = new ArrayList<>();
     private RecyclerView recyclerView;
     private EstabAdapter estabAdapter;
+    private RelativeLayout layout;
     private Cities city;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +39,7 @@ public class Estabelecimentos extends Fragment {
         city = MainActivity.mainActivity.selectedCity;
 
         recyclerView = (RecyclerView) view.findViewById(R.id.estab_rec);
+        layout = (RelativeLayout) view.findViewById(R.id.empty_rec);
         MainActivity.mainActivity.toolbar.setTitle(MainActivity.mainActivity.selectedCity.getCity_name()+" - "+MainActivity.mainActivity.selectedCategory.getCat_name());
         estabAdapter = new EstabAdapter(estabList, view.getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(view.getContext());
@@ -54,6 +57,8 @@ public class Estabelecimentos extends Fragment {
     private void prepareMovieData() {
         if(RealmController.getInstance().has(Establishments.class))
             estabList.addAll(RealmController.getInstance().getAll(Establishments.class));
+        if(!estabList.isEmpty())
+            layout.setVisibility(View.GONE);
         estabAdapter.notifyDataSetChanged();
     }
 
