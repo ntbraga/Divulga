@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,16 +27,20 @@ import divulga.com.br.projectdivulga.ModelDB.Contacts;
 import divulga.com.br.projectdivulga.ModelDB.Establishments;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
 import divulga.com.br.projectdivulga.Utils.DividerItemDecoration;
+import divulga.com.br.projectdivulga.rest.CallWithProgressBar;
+import divulga.com.br.projectdivulga.rest.RestApi;
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class EstablishmentShow extends BaseActivity {
     private Establishments establishments;
-    private List<Contacts> contactsAll;
     private List<Contacts> contactsMail;
     private List<Contacts> contactsPhone;
     private TextView descricao, endereco;
     private RecyclerView telRecyclerView, mailRecyclerView;
     private ContactAdapter mailAdapter, telAdapter;
-
+    private CardView card_contact;
+    private LinearLayout phoneLayout, mailLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +50,6 @@ public class EstablishmentShow extends BaseActivity {
         establishments = MainActivity.mainActivity.selectedEstablishment;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(establishments.getEstab_name());
-        contactsAll = new ArrayList<>();
         contactsMail = new ArrayList<>();
         contactsPhone = new ArrayList<>();
         setViews();
@@ -57,10 +61,9 @@ public class EstablishmentShow extends BaseActivity {
         endereco = (TextView) findViewById(R.id.estab_address);
         telRecyclerView = (RecyclerView) findViewById(R.id.tel_rec);
         mailRecyclerView = (RecyclerView) findViewById(R.id.mail_rec);
-
-        descricao.setText("Short Description");
-        endereco.setText(getAddressConcat());
-
+        card_contact = (CardView) findViewById(R.id.card_content_contact);
+        phoneLayout = (LinearLayout) findViewById(R.id.tel_content_linear);
+        mailLayout = (LinearLayout) findViewById(R.id.mail_content_linear);
         LinearLayout layout = (LinearLayout)findViewById(R.id.showLocationL);
         if (layout != null) {
             layout.setOnClickListener(new View.OnClickListener() {
@@ -119,11 +122,38 @@ public class EstablishmentShow extends BaseActivity {
     }
 
     private void prepareData(){
+        Call<Establishments> call = RestApi.getApiInterface().getEstablishment(establishments.getId());
+        new CallWithProgressBar<Establishments>().doCall(call, MainActivity.mainActivity, Establishments.class, new CallWithProgressBar.ProgressCallBack<Establishments>() {
+            @Override
+            public void onResponse(Call<Establishments> call, Response<Establishments> response) {
+                establishments = response.body();
+                descricao.setText(establishments.getEstab_description());
+                endereco.setText(getAddressConcat());
+                if(!establishments.getContacts().isEmpty()){
+                    for (Contacts contacts : establishments.getContacts()) {
+                        if (contacts.getType().equals("mail")) {
+                            contactsMail.add(contacts);
+                        } else contactsPhone.add(contacts);
+                    }
 
-        // TODO
+                    if(contactsPhone.isEmpty()){
+                        phoneLayout.setVisibility(View.GONE);
+                        telAdapter.notifyDataSetChanged();
+                    }
+                    if(contactsMail.isEmpty()){
+                        mailLayout.setVisibility(View.GONE);
+                        mailAdapter.notifyDataSetChanged();
+                    }
+                }else{
+                    card_contact.setVisibility(View.GONE);
+                }
+            }
 
-        telAdapter.notifyDataSetChanged();
-        mailAdapter.notifyDataSetChanged();
+            @Override
+            public void onFailure(Call<Establishments> call, Throwable t) {
+
+            }
+        });
     }
 
     private String getAddressConcat(){

@@ -3,12 +3,14 @@ package divulga.com.br.projectdivulga.ModelDB;
 
 import divulga.com.br.projectdivulga.Adapters.ContactAdapter;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  *
  * @author PedroNeto
  */
 public class Contacts extends RealmObject{
+    @PrimaryKey
 	private int id;
 	private int id_estab;
 	private String contact;

@@ -114,6 +114,7 @@
 
 
         <android.support.v7.widget.CardView
+            android:id="@+id/card_content_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
@@ -132,43 +133,53 @@
                     android:textAppearance="@android:style/TextAppearance.Material.Medium"
                     android:textColor="#000"
                     android:text="@string/contatos"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@android:style/TextAppearance.Material.Small"
-                    android:textColor="#000"
-                    android:text="@string/telefones"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"/>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/tel_rec"
+                <LinearLayout
+                    android:id="@+id/tel_content_linear"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-
-                </android.support.v7.widget.RecyclerView>
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@android:style/TextAppearance.Material.Small"
-                    android:textColor="#000"
-                    android:text="@string/emails"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:textColor="#000"
+                        android:text="@string/telefones"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"/>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/mail_rec"
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/tel_rec"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/mail_content_linear"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:textColor="#000"
+                        android:text="@string/emails"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/mail_rec"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
 
 
-                </android.support.v7.widget.RecyclerView>
-            </LinearLayout>
+                    </android.support.v7.widget.RecyclerView>
+                    </LinearLayout>
+                </LinearLayout>
 
         </android.support.v7.widget.CardView>
 

@@ -18,6 +18,7 @@ import divulga.com.br.projectdivulga.EstablishmentShow;
 import divulga.com.br.projectdivulga.MainActivity;
 import divulga.com.br.projectdivulga.ModelDB.Establishments;
 import divulga.com.br.projectdivulga.R;
+import divulga.com.br.projectdivulga.rest.RealmController;
 
 /**
  * Created by Taty Braga on 31/05/2016.
@@ -61,9 +62,9 @@ public class EstabAdapter extends RecyclerView.Adapter<EstabAdapter.EstabViewHol
 
     @Override
     public void onBindViewHolder(final EstabViewHolder holder, int position) {
-        final Establishments estab = estabs.get(position);
+        final Establishments estab = RealmController.getInstance().setEstablishment(estabs.get(position));
         holder.name.setText(estab.getEstab_name());
-        holder.fav_fab.setImageDrawable(context.getDrawable(star));
+        holder.fav_fab.setImageDrawable(estab.isFavorite()?context.getDrawable(star_selected) : context.getDrawable(star));
         holder.image.setImageDrawable(context.getDrawable(colors[color]));
         switch(color){
             case 0:
@@ -76,7 +77,7 @@ public class EstabAdapter extends RecyclerView.Adapter<EstabAdapter.EstabViewHol
         holder.fav_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                estab.setFavorite(!estab.isFavorite());
+                RealmController.getInstance().setEstablishmentFavorite(estab);
                 if(estab.isFavorite()){
                     holder.fav_fab.setImageDrawable(context.getDrawable(star_selected));
                 }else{

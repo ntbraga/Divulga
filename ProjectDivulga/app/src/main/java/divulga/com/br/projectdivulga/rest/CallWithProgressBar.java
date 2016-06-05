@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 
 import divulga.com.br.projectdivulga.CustomProgressDialog;
+import divulga.com.br.projectdivulga.ModelDB.Establishments;
 import divulga.com.br.projectdivulga.Utils.CustomAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,7 +17,7 @@ import retrofit2.Response;
  * Created by ntbra on 04/06/2016.
  */
 public class CallWithProgressBar<T>{
-    public void doCall(Call<T> call, final Activity activity, final ProgressCallBack<T> callback){
+    public void doCall(Call<T> call, final Activity activity, final Class<T> clazz, final ProgressCallBack<T> callback){
         CustomAlertDialog.showAlert(activity);
         call.enqueue(new Callback<T>() {
             @Override

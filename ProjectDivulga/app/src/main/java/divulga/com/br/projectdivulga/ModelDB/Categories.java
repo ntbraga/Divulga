@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 import io.realm.annotations.RealmModule;
 
@@ -15,6 +16,7 @@ import io.realm.annotations.RealmModule;
 public class Categories extends RealmObject{
 	private String cat_name;
     private int id_city;
+    @PrimaryKey
 	private int id;
     private RealmList<Establishments> establishments;
 

@@ -22,7 +22,7 @@ public interface ApiInterface {
     Call<Cities> getCity(@Path("id") int id);
 
     @GET("categories/{id}")
-    Call<Cities> getCategories(@Path("id") int id);
+    Call<Categories> getCategories(@Path("id") int id);
 
     @GET("establishments/{id}")
     Call<Establishments> getEstablishment(@Path("id") int id);

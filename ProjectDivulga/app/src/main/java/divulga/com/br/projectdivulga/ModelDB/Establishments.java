@@ -7,6 +7,7 @@ import java.util.List;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Establishments extends RealmObject{
 	private String estab_name;
 	private String address_street;
 	private int id_cat;
+    @PrimaryKey
 	private int id;
 	private String address_zip;
 	private String address_district;

@@ -81,36 +81,25 @@ public class RealmController {
         return realm.where(clazz).count() > 0;
     }
 
-
-
     public RealmResults<Establishments> getAllEstablishmentsFavorites(){
         return realm.where(Establishments.class).equalTo("favorite", true).findAll();
     }
 
-    public void updateAllEstablishments(List<Establishments> updated){
-        Map<Integer, Boolean> favorites = new HashMap<>();
-        if(has(Establishments.class)) {
-            RealmResults<Establishments> all = getAll(Establishments.class);
-            for (int i = 0; i < all.size(); i++) {
-                favorites.put(all.get(i).getId(), all.get(i).isFavorite());
-            }
-            clearAll(Establishments.class);
-        }
+    public void setEstablishmentFavorite(Establishments establishment){
         realm.beginTransaction();
-        for(int i = 0; i<updated.size(); i++){
-            Establishments est = updated.get(i);
-            if(favorites.containsKey(est.getId())){
-                est.setFavorite(favorites.get(est.getId()));
-            }
-            realm.copyToRealm(est);
-        }
+        establishment.setFavorite(!establishment.isFavorite());
+        realm.copyToRealmOrUpdate(establishment);
         realm.commitTransaction();
     }
 
-    public void setEstablishmentFavorite(Establishments establishment, boolean favorite){
+    public Establishments setEstablishment(Establishments establishment){
         realm.beginTransaction();
-        get(Establishments.class, establishment.getId()).setFavorite(favorite);
+        Establishments realmEstab = realm.where(Establishments.class).equalTo("id", establishment.getId()).findFirst();
+        if(realmEstab != null)
+            establishment.setFavorite(realmEstab.isFavorite());
+        realm.copyToRealmOrUpdate(establishment);
         realm.commitTransaction();
+        return  establishment;
     }
 
     public void addAll(List<? extends RealmObject> objects){

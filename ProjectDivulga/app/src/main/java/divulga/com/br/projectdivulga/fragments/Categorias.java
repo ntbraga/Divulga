@@ -87,7 +87,7 @@ public class Categorias extends Fragment {
         */
         Call<Cities> call = RestApi.getApiInterface().getCity(MainActivity.mainActivity.selectedCity.getId());
 
-        new CallWithProgressBar<Cities>().doCall(call, MainActivity.mainActivity, new CallWithProgressBar.ProgressCallBack<Cities>(){
+        new CallWithProgressBar<Cities>().doCall(call, MainActivity.mainActivity, Cities.class, new CallWithProgressBar.ProgressCallBack<Cities>(){
             @Override
             public void onResponse(Call<Cities> call, Response<Cities> response) {
                 categories.clear();

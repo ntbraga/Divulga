@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  *
@@ -12,6 +13,7 @@ import io.realm.RealmObject;
  */
 public class Cities extends RealmObject{
 	private String city_name;
+    @PrimaryKey
 	private int id;
 	private String city_state;
     private RealmList<Categories> categories;
