@@ -1,7 +1,12 @@
 package divulga.com.br.projectdivulga.ModelDB;
 
 
+import java.util.List;
+
+import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.RealmClass;
+import io.realm.annotations.RealmModule;
 
 /**
  *
@@ -11,6 +16,7 @@ public class Categories extends RealmObject{
 	private String cat_name;
     private int id_city;
 	private int id;
+    private RealmList<Establishments> establishments;
 
     public Categories(){}
 
@@ -36,5 +42,13 @@ public class Categories extends RealmObject{
 
     public int getId_city() {
         return id_city;
+    }
+
+    public RealmList<Establishments> getEstablishments() {
+        return establishments;
+    }
+
+    public void setEstablishments(RealmList<Establishments> establishments) {
+        this.establishments = establishments;
     }
 }

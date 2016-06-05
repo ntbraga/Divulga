@@ -94,7 +94,7 @@ public class EstablishmentShow extends BaseActivity {
         telRecyclerView.addOnItemTouchListener(new ClickHelper.RecyclerTouchListener(this, telRecyclerView, new ClickHelper.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                MainActivity.mainActivity.doCall(contactsPhone.get(position).getContact_phone());
+                MainActivity.mainActivity.doCall(contactsPhone.get(position).getContact());
             }
 
             @Override
@@ -107,7 +107,7 @@ public class EstablishmentShow extends BaseActivity {
         mailRecyclerView.addOnItemTouchListener(new ClickHelper.RecyclerTouchListener(this, mailRecyclerView, new ClickHelper.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                MainActivity.mainActivity.sendMail(contactsMail.get(position).getContact_email());
+                MainActivity.mainActivity.sendMail(contactsMail.get(position).getContact());
             }
 
             @Override

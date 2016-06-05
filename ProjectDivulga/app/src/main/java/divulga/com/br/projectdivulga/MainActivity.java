@@ -24,6 +24,9 @@ import divulga.com.br.projectdivulga.fragments.Estabelecimentos;
 import divulga.com.br.projectdivulga.fragments.Favoritos;
 import divulga.com.br.projectdivulga.fragments.Sobre;
 import divulga.com.br.projectdivulga.fragments.TelefonesUteis;
+import divulga.com.br.projectdivulga.rest.ApiInterface;
+import divulga.com.br.projectdivulga.rest.RestApi;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,6 +39,8 @@ public class MainActivity extends BaseActivity
     public Categories selectedCategory;
     public Toolbar toolbar;
     public NavigationView navigationView;
+    public String citiesJson;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,7 @@ public class MainActivity extends BaseActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+        citiesJson = getIntent().getStringExtra("cities");
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         addFragment(Anuncie.class, getString(R.string.anuncie_frag), R.id.nav_anuncie);

@@ -1,11 +1,13 @@
 package divulga.com.br.projectdivulga.fragments;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +19,18 @@ import java.util.List;
 
 import divulga.com.br.projectdivulga.MainActivity;
 import divulga.com.br.projectdivulga.ModelDB.Categories;
+import divulga.com.br.projectdivulga.ModelDB.Cities;
 import divulga.com.br.projectdivulga.R;
 import divulga.com.br.projectdivulga.Adapters.CategoryAdapter;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
 import divulga.com.br.projectdivulga.Utils.GridSpacingItemDecoration;
+import divulga.com.br.projectdivulga.rest.CallWithProgressBar;
 import divulga.com.br.projectdivulga.rest.RealmController;
+import divulga.com.br.projectdivulga.rest.RestApi;
 import io.realm.RealmObject;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Categorias extends Fragment {
     private List<Categories> categories = new ArrayList<>();
@@ -62,7 +70,7 @@ public class Categorias extends Fragment {
             }
         }));
 
-        prepareData();
+        prepareData(view.getContext());
         return view;
     }
 
@@ -72,12 +80,29 @@ public class Categorias extends Fragment {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
-    void prepareData(){
+    void prepareData(Context context){
+        /*
         if(RealmController.getInstance().has(Categories.class))
             categories.addAll(RealmController.getInstance().getAll(Categories.class));
-        if(!categories.isEmpty())
-            layout.setVisibility(View.GONE);
-        categoryAdapter.notifyDataSetChanged();
+        */
+        Call<Cities> call = RestApi.getApiInterface().getCity(MainActivity.mainActivity.selectedCity.getId());
+
+        new CallWithProgressBar<Cities>().doCall(call, MainActivity.mainActivity, new CallWithProgressBar.ProgressCallBack<Cities>(){
+            @Override
+            public void onResponse(Call<Cities> call, Response<Cities> response) {
+                categories.clear();
+                categories.addAll(response.body().getCategories());
+                if(categories.isEmpty())
+                    layout.setVisibility(View.VISIBLE);
+                else layout.setVisibility(View.GONE);
+                categoryAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<Cities> call, Throwable t) {
+
+            }
+        });
     }
 
 }

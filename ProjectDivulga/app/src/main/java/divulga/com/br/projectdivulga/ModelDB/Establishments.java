@@ -3,6 +3,9 @@ package divulga.com.br.projectdivulga.ModelDB;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
+import io.realm.RealmList;
 import io.realm.RealmObject;
 
 /**
@@ -20,6 +23,7 @@ public class Establishments extends RealmObject{
 	private String address_district;
 	private String estab_description;
 	private String address_number;
+    private RealmList<Contacts> contacts;
 
     @com.google.gson.annotations.Expose(deserialize = false, serialize = false)
     private boolean favorite;
@@ -130,4 +134,11 @@ public class Establishments extends RealmObject{
         this.address_number = address_number;
     }
 
+    public RealmList<Contacts> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(RealmList<Contacts> contacts) {
+        this.contacts = contacts;
+    }
 }

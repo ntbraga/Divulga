@@ -10,6 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +25,6 @@ import divulga.com.br.projectdivulga.R;
 import divulga.com.br.projectdivulga.Adapters.CityAdapter;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
 import divulga.com.br.projectdivulga.Utils.DividerItemDecoration;
-import divulga.com.br.projectdivulga.rest.RealmController;
 
 public class Cidades extends Fragment {
 
@@ -62,19 +66,41 @@ public class Cidades extends Fragment {
             }
         }));
 
-        prepareMovieData();
+        prepareData();
 
         return view;
     }
 
 
 
-    private void prepareMovieData() {
+    private void prepareData() {
+        String cities = MainActivity.mainActivity.citiesJson;
+        if(!cities.equals("erro")){
+            Gson gson = new Gson();
+            TypeToken<List<Cities>> token = new TypeToken<List<Cities>>(){};
+            cityList.clear();
+            try {
+                cityList.addAll(gson.getAdapter(token).fromJson(cities));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            cityAdapter.notifyDataSetChanged();
+        }else{
+
+        }
+
+        if(cityList.isEmpty())
+            layout.setVisibility(View.VISIBLE);
+        else layout.setVisibility(View.GONE);
+
+        /*
+
         if(RealmController.getInstance().has(Cities.class))
             cityList.addAll(RealmController.getInstance().getAll(Cities.class));
         if(!cityList.isEmpty())
             layout.setVisibility(View.GONE);
-        cityAdapter.notifyDataSetChanged();
+
+        */
     }
 
 }

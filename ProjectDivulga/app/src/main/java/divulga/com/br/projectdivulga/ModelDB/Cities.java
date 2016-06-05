@@ -1,6 +1,9 @@
 package divulga.com.br.projectdivulga.ModelDB;
 
 
+import java.util.List;
+
+import io.realm.RealmList;
 import io.realm.RealmObject;
 
 /**
@@ -11,6 +14,7 @@ public class Cities extends RealmObject{
 	private String city_name;
 	private int id;
 	private String city_state;
+    private RealmList<Categories> categories;
 
     public Cities(){}
 
@@ -41,5 +45,11 @@ public class Cities extends RealmObject{
         this.city_state = city_state;
     }
 
+    public RealmList<Categories> getCategories() {
+        return categories;
+    }
 
+    public void setCategories(RealmList<Categories> categories) {
+        this.categories = categories;
+    }
 }

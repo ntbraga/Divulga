@@ -10,9 +10,9 @@ import io.realm.RealmObject;
  */
 public class Contacts extends RealmObject{
 	private int id;
-	private String contact_phone;
 	private int id_estab;
-	private String contact_email;
+	private String contact;
+    private String type;
 
     public Contacts(){}
 
@@ -24,33 +24,27 @@ public class Contacts extends RealmObject{
         this.id = id;
     }
 
-    public String getContact_phone(){
-       return this.contact_phone;
-    }
-
-
-    public void setContact_phone(String contact_phone){
-        this.contact_phone = contact_phone;
-    }
-
-
     public int getId_estab(){
        return this.id_estab;
     }
-
 
     public void setId_estab(int id_estab){
         this.id_estab = id_estab;
     }
 
-
-    public String getContact_email(){
-       return this.contact_email;
+    public String getContact(){
+       return this.contact;
     }
 
-
-    public void setContact_email(String contact_email){
-        this.contact_email = contact_email;
+    public void setContact(String contact){
+        this.contact = contact;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
 }

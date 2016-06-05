@@ -28,5 +28,4 @@ public class Anuncie extends Fragment {
         });
         return view;
     }
-
 }

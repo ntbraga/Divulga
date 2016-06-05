@@ -61,11 +61,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
         holder.ico.setImageDrawable(context.getDrawable(type.ico));
         switch(type){
             case EMAIL:{
-                holder.value.setText(contact.getContact_email());
+                holder.value.setText(contact.getContact());
                 break;
             }
             case TELEPHONE:{
-                holder.value.setText(contact.getContact_phone());
+                holder.value.setText(contact.getContact());
                 break;
             }
         }

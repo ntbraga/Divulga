@@ -17,6 +17,9 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
+import divulga.com.br.projectdivulga.rest.ApiInterface;
+import divulga.com.br.projectdivulga.rest.RestApi;
+
 /**
  * Created by Taty Braga on 30/05/2016.
  */
