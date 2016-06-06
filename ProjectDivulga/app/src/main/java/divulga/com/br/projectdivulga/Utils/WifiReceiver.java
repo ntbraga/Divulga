@@ -13,7 +13,7 @@ public class WifiReceiver extends BroadcastReceiver {
     public static Object wait = new Object();
     @Override
     public void onReceive(Context context, Intent intent) {
-
+        CustomAlertDialog.showDialog = false;
         NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
         if(info != null && info.isConnected()) {
             // Do your work.

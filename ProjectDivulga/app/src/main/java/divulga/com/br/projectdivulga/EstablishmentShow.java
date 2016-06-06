@@ -28,6 +28,7 @@ import divulga.com.br.projectdivulga.ModelDB.Establishments;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
 import divulga.com.br.projectdivulga.Utils.DividerItemDecoration;
 import divulga.com.br.projectdivulga.rest.CallWithProgressBar;
+import divulga.com.br.projectdivulga.rest.RealmController;
 import divulga.com.br.projectdivulga.rest.RestApi;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -127,6 +128,7 @@ public class EstablishmentShow extends BaseActivity {
             @Override
             public void onResponse(Call<Establishments> call, Response<Establishments> response) {
                 establishments = response.body();
+                RealmController.getInstance().setEstablishment(establishments);
                 descricao.setText(establishments.getEstab_description());
                 endereco.setText(getAddressConcat());
                 if(!establishments.getContacts().isEmpty()){
@@ -156,13 +158,42 @@ public class EstablishmentShow extends BaseActivity {
 
             @Override
             public void onFailure(Call<Establishments> call, Throwable t) {
+                establishments = RealmController.getInstance().get(Establishments.class, establishments.getId());
+                descricao.setText(establishments.getEstab_description());
+                endereco.setText(getAddressConcat());
+                if(!establishments.getContacts().isEmpty()){
+                    for (Contacts contacts : establishments.getContacts()) {
+                        if (contacts.getType().equals("mail")) {
+                            contactsMail.add(contacts);
+                        } else contactsPhone.add(contacts);
+                    }
 
+                    if(contactsPhone.isEmpty()){
+                        phoneLayout.setVisibility(View.GONE);
+                    }else{
+                        phoneLayout.setVisibility(View.VISIBLE);
+                        telAdapter.notifyDataSetChanged();
+                    }
+                    if(contactsMail.isEmpty()){
+                        mailLayout.setVisibility(View.GONE);
+                    }else{
+                        mailLayout.setVisibility(View.VISIBLE);
+                        mailAdapter.notifyDataSetChanged();
+                    }
+                    card_contact.setVisibility(View.VISIBLE);
+                }else{
+                    card_contact.setVisibility(View.GONE);
+                }
             }
         });
     }
 
     private String getAddressConcat(){
-        return "Address";
+        return establishments.getAddress_street()+" "+
+                establishments.getAddress_number()+" "+
+                establishments.getAddress_complement()+" "+
+                establishments.getAddress_district()+" "+
+                establishments.getAddress_zip();
     }
 
 }

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.support.v4.app.Fragment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,13 +62,6 @@ public class RealmController {
         return realm;
     }
 
-    //clear all objects from Book.class
-    public void clearAll(Class<? extends RealmObject> clazz) {
-        realm.beginTransaction();
-        realm.where(clazz).findAll().deleteAllFromRealm();
-        realm.commitTransaction();
-    }
-
     //find all objects in the Book.class
     public <T extends RealmObject> RealmResults<T> getAll(Class<T> clazz) {
         return realm.where(clazz).findAll();
@@ -75,6 +69,10 @@ public class RealmController {
 
     public RealmResults<Categories> getCategories(int id_city){
         return realm.where(Categories.class).equalTo("id_city", id_city).findAll();
+    }
+
+    public RealmResults<Establishments> getEstablishments(int id_cat){
+        return realm.where(Establishments.class).equalTo("id_cat", id_cat).findAll();
     }
 
     //query a single item with the given id
@@ -105,19 +103,41 @@ public class RealmController {
             establishment.setFavorite(realmEstab.isFavorite());
         realm.copyToRealmOrUpdate(establishment);
         realm.commitTransaction();
-        return  establishment;
+        return establishment;
     }
 
-    public void addAll(List<? extends RealmObject> objects){
+
+
+    public void clearAndAddAllEstablishments(List<Establishments> objects, int id_cat){
         realm.beginTransaction();
-        realm.copyToRealm(objects);
+        if(objects.size() > 0){
+            List<Establishments> temp = new ArrayList<>();
+            for(Establishments estab: objects){
+                Establishments tmp = realm.where(Establishments.class).equalTo("id", estab.getId()).findFirst();
+                if(tmp != null) estab.setFavorite(tmp.isFavorite());
+                temp.add(estab);
+            }
+            realm.where(Establishments.class).equalTo("id_cat", id_cat).findAll().deleteAllFromRealm();
+            realm.copyToRealmOrUpdate(temp);
+        }else{
+            realm.where(Establishments.class).equalTo("id_cat", id_cat).findAll().deleteAllFromRealm();
+        }
         realm.commitTransaction();
     }
 
-    public <T extends RealmObject> void clearAndAddAll(List<T> objects, Class<T> clazz){
-        clearAll(clazz);
-        addAll(objects);
+
+    public void clearAndAddAllCities(List<Cities> objects){
+        realm.beginTransaction();
+        realm.where(Cities.class).findAll().deleteAllFromRealm();
+        realm.copyToRealmOrUpdate(objects);
+        realm.commitTransaction();
     }
 
+    public void clearAndAddAllCategories(List<Categories> objecs, int id_city){
+        realm.beginTransaction();
+        realm.where(Categories.class).equalTo("id_city", id_city).findAll().deleteAllFromRealm();
+        realm.copyToRealmOrUpdate(objecs);
+        realm.commitTransaction();
+    }
 
 }

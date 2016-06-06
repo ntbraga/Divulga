@@ -101,7 +101,7 @@ public class Categorias extends Fragment {
                     layout.setVisibility(View.VISIBLE);
                 else layout.setVisibility(View.GONE);
                 categoryAdapter.notifyDataSetChanged();
-                RealmController.getInstance().clearAndAddAll(categories, Categories.class);
+                RealmController.getInstance().clearAndAddAllCategories(categories, MainActivity.mainActivity.selectedCity.getId());
             }
 
             @Override

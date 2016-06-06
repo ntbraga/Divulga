@@ -20,6 +20,7 @@ import divulga.com.br.projectdivulga.R;
 public class CustomAlertDialog{
     public static CustomProgressDialog instance;
     public static Object wait = new Object();
+    public static boolean showDialog = false;
     public static CustomProgressDialog showAlert(Activity activity){
         Intent intent = new Intent(activity, CustomProgressDialog.class);
         activity.startActivity(intent);
@@ -72,22 +73,31 @@ public class CustomAlertDialog{
     }
 
     public static void showNoInternetDialog(final Activity activity, final AlertAction action) {
-        AlertDialog dialog = new AlertDialog.Builder(activity)
-                .setMessage("Não há conexão com a internet, você pode estar acessando dados desatualizados.\n" +
-                        "Ative a internet para atulizar!")
-                .setIcon(activity.getDrawable(R.drawable.ic_signal_off))
-                .setPositiveButton("Ativar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        WifiManager mng = (WifiManager) activity.getSystemService(Context.WIFI_SERVICE);
-                        if(action != null && mng.setWifiEnabled(true))
-                            action.okAction(mng);
-                    }
-                })
-                .setNeutralButton("Continuar", null)
-                .create();
+        if(!showDialog) {
+            final WifiManager mng = (WifiManager) activity.getSystemService(Context.WIFI_SERVICE);
+            AlertDialog dialog = new AlertDialog.Builder(activity)
+                    .setMessage("Não há conexão com a internet, você pode estar acessando dados desatualizados.\n" +
+                            "Ative a internet para atulizar!")
+                    .setPositiveButton("Ativar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (!mng.isWifiEnabled() && mng.setWifiEnabled(true) && action != null)
+                                action.okAction(mng);
+                        }
+                    })
+                    .setNeutralButton("Continuar", null)
+                    .create();
 
-        dialog.show();
+            AlertDialog dialog2 = new AlertDialog.Builder(activity)
+                    .setMessage("Não há conexão com a internet, você pode estar acessando dados desatualizados.\n")
+                    .setNeutralButton("Continuar", null)
+                    .create();
+
+            if (!mng.isWifiEnabled())
+                dialog.show();
+            else dialog2.show();
+            showDialog = true;
+        }
     }
 
     public interface ProgressAction{

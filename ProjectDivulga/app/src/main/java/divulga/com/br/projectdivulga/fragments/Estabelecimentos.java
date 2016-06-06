@@ -1,7 +1,10 @@
 package divulga.com.br.projectdivulga.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +26,8 @@ import divulga.com.br.projectdivulga.ModelDB.Establishments;
 import divulga.com.br.projectdivulga.R;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
 import divulga.com.br.projectdivulga.Adapters.EstabAdapter;
+import divulga.com.br.projectdivulga.Utils.CustomAlertDialog;
+import divulga.com.br.projectdivulga.Utils.WifiReceiver;
 import divulga.com.br.projectdivulga.rest.CallWithProgressBar;
 import divulga.com.br.projectdivulga.rest.RealmController;
 import divulga.com.br.projectdivulga.rest.RestApi;
@@ -54,12 +59,12 @@ public class Estabelecimentos extends Fragment {
         recyclerView.setAdapter(estabAdapter);
 
 
-        prepareMovieData();
+        prepareData(view.getContext());
 
         return view;
     }
 
-    private void prepareMovieData() {
+    private void prepareData(final Context context) {
         Call<Categories> call = RestApi.getApiInterface().getCategories(MainActivity.mainActivity.selectedCategory.getId());
 
         new CallWithProgressBar<Categories>().doCall(call, MainActivity.mainActivity, Categories.class, new CallWithProgressBar.ProgressCallBack<Categories>() {
@@ -71,11 +76,42 @@ public class Estabelecimentos extends Fragment {
                     layout.setVisibility(View.VISIBLE);
                 else layout.setVisibility(View.GONE);
                 estabAdapter.notifyDataSetChanged();
+                RealmController.getInstance().clearAndAddAllEstablishments(estabList, MainActivity.mainActivity.selectedCategory.getId());
             }
 
             @Override
             public void onFailure(Call<Categories> call, Throwable t) {
+                estabList.clear();
+                estabList.addAll(RealmController.getInstance().getEstablishments(MainActivity.mainActivity.selectedCategory.getId()));
+                if(estabList.isEmpty())
+                    layout.setVisibility(View.VISIBLE);
+                else layout.setVisibility(View.GONE);
+                estabAdapter.notifyDataSetChanged();
+                CustomAlertDialog.showNoInternetDialog(MainActivity.mainActivity, new CustomAlertDialog.AlertAction() {
+                    @Override
+                    public void okAction(final WifiManager manager) {
+                        CustomAlertDialog.doBackgroundProgressAction(MainActivity.mainActivity, new CustomAlertDialog.ProgressAction() {
+                            @Override
+                            public void doAction() {
+                                synchronized (WifiReceiver.wait){
+                                    try {
+                                        WifiReceiver.wait.wait(3000);
+                                        Thread.sleep(2000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                new Handler(context.getMainLooper()).post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        prepareData(context);
+                                    }
+                                });
 
+                            }
+                        });
+                    }
+                });
             }
         });
 

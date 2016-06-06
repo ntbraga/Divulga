@@ -83,7 +83,7 @@ public class Cidades extends Fragment {
             cityList.clear();
             try {
                 cityList.addAll(gson.getAdapter(token).fromJson(cities));
-                RealmController.getInstance().clearAndAddAll(cityList, Cities.class);
+                RealmController.getInstance().clearAndAddAllCities(cityList);
             } catch (IOException e) {
                 e.printStackTrace();
             }
