@@ -10,9 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import divulga.com.br.projectdivulga.ModelDB.Categories;
 import divulga.com.br.projectdivulga.ModelDB.Cities;
 import divulga.com.br.projectdivulga.ModelDB.Establishments;
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 
@@ -69,6 +71,10 @@ public class RealmController {
     //find all objects in the Book.class
     public <T extends RealmObject> RealmResults<T> getAll(Class<T> clazz) {
         return realm.where(clazz).findAll();
+    }
+
+    public RealmResults<Categories> getCategories(int id_city){
+        return realm.where(Categories.class).equalTo("id_city", id_city).findAll();
     }
 
     //query a single item with the given id

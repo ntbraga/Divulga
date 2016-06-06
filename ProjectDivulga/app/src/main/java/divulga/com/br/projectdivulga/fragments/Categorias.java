@@ -2,7 +2,9 @@ package divulga.com.br.projectdivulga.fragments;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +26,9 @@ import divulga.com.br.projectdivulga.ModelDB.Cities;
 import divulga.com.br.projectdivulga.R;
 import divulga.com.br.projectdivulga.Adapters.CategoryAdapter;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
+import divulga.com.br.projectdivulga.Utils.CustomAlertDialog;
 import divulga.com.br.projectdivulga.Utils.GridSpacingItemDecoration;
+import divulga.com.br.projectdivulga.Utils.WifiReceiver;
 import divulga.com.br.projectdivulga.rest.CallWithProgressBar;
 import divulga.com.br.projectdivulga.rest.RealmController;
 import divulga.com.br.projectdivulga.rest.RestApi;
@@ -80,7 +85,7 @@ public class Categorias extends Fragment {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
-    void prepareData(Context context){
+    void prepareData(final Context context){
         /*
         if(RealmController.getInstance().has(Categories.class))
             categories.addAll(RealmController.getInstance().getAll(Categories.class));
@@ -96,11 +101,42 @@ public class Categorias extends Fragment {
                     layout.setVisibility(View.VISIBLE);
                 else layout.setVisibility(View.GONE);
                 categoryAdapter.notifyDataSetChanged();
+                RealmController.getInstance().clearAndAddAll(categories, Categories.class);
             }
 
             @Override
             public void onFailure(Call<Cities> call, Throwable t) {
+                categories.clear();
+                categories.addAll(RealmController.getInstance().getCategories(MainActivity.mainActivity.selectedCity.getId()));
+                if(categories.isEmpty())
+                    layout.setVisibility(View.VISIBLE);
+                else layout.setVisibility(View.GONE);
+                categoryAdapter.notifyDataSetChanged();
+                CustomAlertDialog.showNoInternetDialog(MainActivity.mainActivity, new CustomAlertDialog.AlertAction() {
+                    @Override
+                    public void okAction(final WifiManager manager) {
+                        CustomAlertDialog.doBackgroundProgressAction(MainActivity.mainActivity, new CustomAlertDialog.ProgressAction() {
+                            @Override
+                            public void doAction() {
+                                synchronized (WifiReceiver.wait){
+                                    try {
+                                        WifiReceiver.wait.wait(3000);
+                                        Thread.sleep(2000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                new Handler(context.getMainLooper()).post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        prepareData(context);
+                                    }
+                                });
 
+                            }
+                        });
+                    }
+                });
             }
         });
     }

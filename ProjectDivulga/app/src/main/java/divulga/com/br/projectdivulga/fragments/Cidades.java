@@ -24,7 +24,9 @@ import divulga.com.br.projectdivulga.ModelDB.Cities;
 import divulga.com.br.projectdivulga.R;
 import divulga.com.br.projectdivulga.Adapters.CityAdapter;
 import divulga.com.br.projectdivulga.Utils.ClickHelper;
+import divulga.com.br.projectdivulga.Utils.CustomAlertDialog;
 import divulga.com.br.projectdivulga.Utils.DividerItemDecoration;
+import divulga.com.br.projectdivulga.rest.RealmController;
 
 public class Cidades extends Fragment {
 
@@ -81,16 +83,20 @@ public class Cidades extends Fragment {
             cityList.clear();
             try {
                 cityList.addAll(gson.getAdapter(token).fromJson(cities));
+                RealmController.getInstance().clearAndAddAll(cityList, Cities.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            cityAdapter.notifyDataSetChanged();
+
         }else{
-
+            cityList.clear();
+            cityList.addAll(RealmController.getInstance().getAll(Cities.class));
         }
-
-        if(cityList.isEmpty())
+        cityAdapter.notifyDataSetChanged();
+        if(cityList.isEmpty()){
+            CustomAlertDialog.getAlertDialog(MainActivity.mainActivity, "É necessário conectar-se a internet para utilizar o aplicativo pela primeira vez.", R.drawable.ic_signal_off).show();
             layout.setVisibility(View.VISIBLE);
+        }
         else layout.setVisibility(View.GONE);
 
         /*

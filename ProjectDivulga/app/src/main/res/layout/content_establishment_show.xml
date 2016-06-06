@@ -36,7 +36,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_toEndOf="@id/ic_est_desc">
 
                         <TextView
@@ -50,7 +50,6 @@
                             android:id="@+id/estab_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Endereço xxxxxxxxxxx"
                             />
 
 
@@ -87,7 +86,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:layout_toEndOf="@id/ic_est_end">
 
                             <TextView
@@ -101,7 +100,6 @@
                                 android:id="@+id/estab_address"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Endereço xxxxxxxxxxx"
                                 />
 
 
@@ -119,7 +117,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"

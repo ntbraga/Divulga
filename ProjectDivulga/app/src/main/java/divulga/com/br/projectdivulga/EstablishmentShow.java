@@ -138,12 +138,17 @@ public class EstablishmentShow extends BaseActivity {
 
                     if(contactsPhone.isEmpty()){
                         phoneLayout.setVisibility(View.GONE);
+                    }else{
+                        phoneLayout.setVisibility(View.VISIBLE);
                         telAdapter.notifyDataSetChanged();
                     }
                     if(contactsMail.isEmpty()){
                         mailLayout.setVisibility(View.GONE);
+                    }else{
+                        mailLayout.setVisibility(View.VISIBLE);
                         mailAdapter.notifyDataSetChanged();
                     }
+                    card_contact.setVisibility(View.VISIBLE);
                 }else{
                     card_contact.setVisibility(View.GONE);
                 }

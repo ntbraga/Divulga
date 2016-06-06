@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import divulga.com.br.projectdivulga.ModelDB.Categories;
 import divulga.com.br.projectdivulga.ModelDB.Cities;
@@ -120,6 +121,21 @@ public class MainActivity extends BaseActivity
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == RESULT_OK){
+            switch(requestCode){
+                case 123:{
+                    Toast.makeText(this, "HUE ", Toast.LENGTH_SHORT);
+                    break;
+                }
+                default:{
+                    break;
+                }
+            }
+        }
+    }
+
     private Intent call = null;
 
     @Override
@@ -135,7 +151,6 @@ public class MainActivity extends BaseActivity
                 }
                 break;
             }
-
             default:{
 
             }

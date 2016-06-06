@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.support.annotation.DrawableRes;
+import android.util.Log;
 
 import divulga.com.br.projectdivulga.CustomProgressDialog;
 import divulga.com.br.projectdivulga.ModelDB.Establishments;
@@ -17,20 +19,20 @@ import retrofit2.Response;
  * Created by ntbra on 04/06/2016.
  */
 public class CallWithProgressBar<T>{
+
     public void doCall(Call<T> call, final Activity activity, final Class<T> clazz, final ProgressCallBack<T> callback){
         CustomAlertDialog.showAlert(activity);
         call.enqueue(new Callback<T>() {
             @Override
             public void onResponse(Call<T> call, Response<T> response) {
+                CustomAlertDialog.waitAndFinish();
                 callback.onResponse(call, response);
-                CustomProgressDialog.instance.finish();
             }
 
             @Override
             public void onFailure(Call<T> call, Throwable t) {
+                CustomAlertDialog.waitAndFinish();
                 callback.onFailure(call, t);
-                CustomProgressDialog.instance.finish();
-                new AlertDialog.Builder(activity).setTitle("Erro").setMessage(t.getMessage()).create().show();
             }
         });
     }
