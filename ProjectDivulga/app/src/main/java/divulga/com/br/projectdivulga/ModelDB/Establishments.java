@@ -25,6 +25,8 @@ public class Establishments extends RealmObject{
 	private String address_district;
 	private String estab_description;
 	private String address_number;
+    private String opening_time;
+    private String closing_time;
     private RealmList<Contacts> contacts;
 
     @com.google.gson.annotations.Expose(deserialize = false, serialize = false)
@@ -142,5 +144,21 @@ public class Establishments extends RealmObject{
 
     public void setContacts(RealmList<Contacts> contacts) {
         this.contacts = contacts;
+    }
+
+    public String getOpening_time() {
+        return opening_time;
+    }
+
+    public void setOpening_time(String opening_time) {
+        this.opening_time = opening_time;
+    }
+
+    public void setClosing_time(String closing_time) {
+        this.closing_time = closing_time;
+    }
+
+    public String getClosing_time() {
+        return closing_time;
     }
 }
