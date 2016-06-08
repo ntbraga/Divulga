@@ -18,6 +18,7 @@ import divulga.com.br.projectdivulga.EstablishmentShow;
 import divulga.com.br.projectdivulga.MainActivity;
 import divulga.com.br.projectdivulga.ModelDB.Establishments;
 import divulga.com.br.projectdivulga.R;
+import divulga.com.br.projectdivulga.Utils.Utils;
 import divulga.com.br.projectdivulga.rest.RealmController;
 
 /**
@@ -30,7 +31,7 @@ public class EstabAdapter extends RecyclerView.Adapter<EstabAdapter.EstabViewHol
 
     public class EstabViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
-        public ImageView image;
+        public ImageView image, available;
         public FloatingActionButton fav_fab;
         public RelativeLayout clickLayout;
         public EstabViewHolder(View view) {
@@ -39,6 +40,7 @@ public class EstabAdapter extends RecyclerView.Adapter<EstabAdapter.EstabViewHol
             image = (ImageView) view.findViewById(R.id.estab_img);
             fav_fab = (FloatingActionButton) view.findViewById(R.id.estab_fab_fav);
             clickLayout = (RelativeLayout) view.findViewById(R.id.click_estab);
+            available = (ImageView) view.findViewById(R.id.estab_icon_open);
         }
     }
 
@@ -66,6 +68,7 @@ public class EstabAdapter extends RecyclerView.Adapter<EstabAdapter.EstabViewHol
         holder.name.setText(estab.getEstab_name());
         holder.fav_fab.setImageDrawable(estab.isFavorite()?context.getDrawable(star_selected) : context.getDrawable(star));
         holder.image.setImageDrawable(context.getDrawable(colors[color]));
+        holder.available.setImageDrawable(Utils.getAvailableIcon(context, estab.getOpening_time(), estab.getClosing_time(), R.drawable.ic_circle_open, R.drawable.ic_circle_close));
         switch(color){
             case 0:
             case 1:{

@@ -5,6 +5,7 @@ import java.util.List;
 import divulga.com.br.projectdivulga.ModelDB.Categories;
 import divulga.com.br.projectdivulga.ModelDB.Cities;
 import divulga.com.br.projectdivulga.ModelDB.Establishments;
+import divulga.com.br.projectdivulga.ModelDB.Validation;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -26,4 +27,7 @@ public interface ApiInterface {
 
     @GET("establishments/{id}")
     Call<Establishments> getEstablishment(@Path("id") int id);
+
+    @GET("demo")
+    Call<Validation> getValidation();
 }

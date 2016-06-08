@@ -55,6 +55,7 @@ public class Favoritos extends Fragment {
 
         if(!estabList.isEmpty())
             layout.setVisibility(View.GONE);
+        else layout.setVisibility(View.VISIBLE);
         estabAdapter.notifyDataSetChanged();
     }
 

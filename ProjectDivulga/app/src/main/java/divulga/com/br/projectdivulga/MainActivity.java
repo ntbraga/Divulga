@@ -25,9 +25,10 @@ import divulga.com.br.projectdivulga.fragments.Estabelecimentos;
 import divulga.com.br.projectdivulga.fragments.Favoritos;
 import divulga.com.br.projectdivulga.fragments.Sobre;
 import divulga.com.br.projectdivulga.fragments.TelefonesUteis;
-import divulga.com.br.projectdivulga.rest.ApiInterface;
-import divulga.com.br.projectdivulga.rest.RestApi;
-import retrofit2.converter.gson.GsonConverterFactory;
+import android.support.v7.app.AlertDialog;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -55,6 +56,15 @@ public class MainActivity extends BaseActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         citiesJson = getIntent().getStringExtra("cities");
+
+        long deadline = getIntent().getLongExtra("deadline", 0);
+        new AlertDialog.Builder(MainActivity.this)
+                .setMessage("Esta é uma versão de testes e irá expirar em: "
+                        +new SimpleDateFormat("dd-MM-yyyy").format(new Date(deadline)))
+                .setCancelable(false)
+                .setNeutralButton("Continuar", null)
+                .create().show();
+
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         addFragment(Anuncie.class, getString(R.string.anuncie_frag), R.id.nav_anuncie);

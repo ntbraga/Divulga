@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#009688</color>
-    <color name="colorPrimaryDark">#00796B</color>
-    <color name="colorAccent">#009688</color>
-    <color name="colorBorder0">#448AFF</color>
-    <color name="colorBorder1">#F44333</color>
-    <color name="colorBorder2">#009688</color>
+    <color name="colorPrimaryDark">#4527A0</color>
+    <color name="colorPrimary">#512DA8</color>
+    <color name="colorAccent">#5E3581</color>
+    <color name="colorBorder0">#E64A19</color>
+    <color name="colorBorder1">#0288D1</color>
+    <color name="colorBorder2">#4CAF50</color>
     <color name="transparent">@android:color/transparent</color>
     <color name="viewBg">#f1f5f8</color>
     <color name="album_title">#4c4c4c</color>

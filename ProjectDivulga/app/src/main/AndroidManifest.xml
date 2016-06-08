@@ -72,12 +72,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CustomProgressDialog"
-                    android:theme="@style/Theme.AppCompat.Light.Dialog">
-
-        </activity>
-
-        <receiver android:name=".Utils.WifiReceiver" >
+        <activity
+            android:name=".CustomProgressDialog"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"></activity>
+        <receiver android:name=".Utils.WifiReceiver">
             <intent-filter android:priority="100">
                 <action android:name="android.net.wifi.STATE_CHANGE" />
             </intent-filter>

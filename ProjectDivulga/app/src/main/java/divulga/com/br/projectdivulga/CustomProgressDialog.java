@@ -24,4 +24,9 @@ public class CustomProgressDialog extends Activity {
         super.finish();
         CustomAlertDialog.instance = null;
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

@@ -16,15 +16,15 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerInParent="true"
-        android:indeterminateTint="#FFF"
+        android:indeterminateTint="@android:color/white"
         android:indeterminate="true"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/progress_splash"
         android:layout_centerHorizontal="true"
-        android:textSize="25dp"
-        android:textColor="#FFF"
+        android:textSize="25sp"
+        android:textColor="@android:color/white"
         android:text="@string/app_name"/>
 
 </RelativeLayout>

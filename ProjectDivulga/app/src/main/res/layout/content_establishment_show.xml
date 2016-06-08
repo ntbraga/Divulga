@@ -19,43 +19,83 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp">
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="16dp">
-
-                    <ImageView
-                        android:id="@+id/ic_est_desc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_desc"
-                        android:layout_centerVertical="true"/>
-
-                    <LinearLayout
+                    android:orientation="vertical">
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginStart="10dp"
-                        android:layout_toEndOf="@id/ic_est_desc">
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginLeft="16dp">
 
-                        <TextView
+                        <ImageView
+                            android:id="@+id/ic_est_func"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                            android:textColor="#000"
-                            android:text="@string/descri_o"/>
+                            android:src="@drawable/ic_clock"
+                            android:layout_centerVertical="true"/>
 
-                        <TextView
-                            android:id="@+id/estab_desc"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@id/ic_est_func">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                                android:textColor="#000"
+                                android:text="@string/funcionamento"/>
+
+                            <TextView
+                                android:id="@+id/estab_funcionamento"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                />
+
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="16dp">
+
+                        <ImageView
+                            android:id="@+id/ic_est_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            />
+                            android:background="@drawable/ic_desc"
+                            android:layout_centerVertical="false"/>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@id/ic_est_desc">
 
-                    </LinearLayout>
-                </RelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                                android:textColor="#000"
+                                android:text="@string/descri_o"/>
 
+                            <TextView
+                                android:id="@+id/estab_desc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView

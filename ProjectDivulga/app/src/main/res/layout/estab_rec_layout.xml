@@ -49,7 +49,7 @@
                         android:id="@+id/estab_icon_open"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/ic_circle"
+                        android:background="@drawable/ic_circle_open"
                         android:backgroundTint="@color/green_open"
                         />
 

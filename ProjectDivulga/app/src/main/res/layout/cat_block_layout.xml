@@ -28,7 +28,8 @@
                     android:id="@+id/cat_img"
                     android:layout_width="@dimen/album_cover_height"
                     android:layout_height="@dimen/album_cover_height"
-                    android:src="@drawable/ic_pic"
+                    android:src="@drawable/ic_cat_icon"
+                    android:tint="@android:color/darker_gray"
                     android:layout_gravity="center_horizontal"/>
 
                 <TextView

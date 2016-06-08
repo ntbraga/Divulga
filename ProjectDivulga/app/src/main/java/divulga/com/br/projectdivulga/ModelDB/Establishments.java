@@ -1,6 +1,8 @@
 package divulga.com.br.projectdivulga.ModelDB;
 
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
